@@ -22,8 +22,8 @@ public class EnemyController : MonoBehaviour
     {
         Transform target = _target.transform;
         Vector2 direction = target.position - transform.position;
-
-
+        
+        
         transform.position =
             Vector2.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
     }
