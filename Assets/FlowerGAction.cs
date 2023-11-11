@@ -13,6 +13,9 @@ public class FlowerGAction : MonoBehaviour
     [SerializeField] private List<GameObject> beeUI = new List<GameObject>(5);
     [SerializeField] private GameObject canvasBeeUI;
     [SerializeField] private GameObject canvasHarvestUI;
+    [SerializeField] private Sprite highlightedSprite;
+    private Sprite normalSprite;
+    private SpriteRenderer spriteRendered;
 
     private void UpdateBeeUI()
     {
@@ -23,6 +26,7 @@ public class FlowerGAction : MonoBehaviour
     {
         if (!isReadyToHarvest)
         {
+            spriteRendered.sprite = highlightedSprite;
             canvasBeeUI.SetActive(true);
         }
     }
@@ -32,18 +36,20 @@ public class FlowerGAction : MonoBehaviour
         if (!isReadyToHarvest)
         {
             canvasBeeUI.SetActive(false);
+            spriteRendered.sprite = normalSprite;
         }
     }
 
     private void Start()
     {
+        spriteRendered = gameObject.GetComponent<SpriteRenderer>();
+        normalSprite = gameObject.GetComponent<SpriteRenderer>().sprite;
         _startLaunchGrowth();
     }
 
     public HoneyState UpdateBeeNumber()
     {
         HoneyState res = HoneyState.Full;
-        Debug.Log(isReadyToHarvest);
         if (isReadyToHarvest)
         {
             res = HoneyState.Ready;

@@ -21,6 +21,8 @@ public class PlayerActions : MonoBehaviour
     [SerializeField] private HoneySpawnMonitor spawnMonitor;
 
     private BoxCollider2D beeSpawnArena;
+    private HoneyState currentFlowerState;
+    private int countCollider;
     private bool _canPlantFlowers = true;
     private bool _canInteractWithFlowers = true;
     private CounterHandler _counterHandler;
@@ -43,6 +45,21 @@ public class PlayerActions : MonoBehaviour
         beeSpawnArena = GetComponent<BoxCollider2D>();
     }
 
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        Debug.Log(other.tag);
+        if (other.CompareTag("Flower"))
+        {
+            _canInteractWithFlowers = false;
+            Debug.Log("Here is false");
+            currentFlower = null;
+            other.gameObject.GetComponent<FlowerGAction>().HideBeeUI();
+        }
+        else if (other.CompareTag("FlowerSpawn"))
+        {
+            _canPlantFlowers = true;
+        }
+    }
     private void OnTriggerEnter2D(Collider2D col)
     {
         if (col.CompareTag("Honey"))
@@ -53,23 +70,17 @@ public class PlayerActions : MonoBehaviour
         }
         else if (col.CompareTag("Flower"))
         {
-            _canPlantFlowers = false;
             _canInteractWithFlowers = true;
             currentFlower = col.gameObject;
             col.gameObject.GetComponent<FlowerGAction>().ShowBeeUI();
         }
-    }
-
-    private void OnTriggerExit2D(Collider2D other)
-    {
-        if (other.CompareTag("Flower"))
+        else if (col.CompareTag("FlowerSpawn"))
         {
-            _canPlantFlowers = true;
-            _canInteractWithFlowers = false;
-            currentFlower = null;
-            other.gameObject.GetComponent<FlowerGAction>().HideBeeUI();
+            _canPlantFlowers = false;
         }
     }
+
+
 
     public Vector2 GetRandomPointInCollider(BoxCollider2D boxCollider)
     {
@@ -127,7 +138,7 @@ public class PlayerActions : MonoBehaviour
 
     private void HarvestFlowers()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && _canInteractWithFlowers)
+        if (Input.GetKeyDown(KeyCode.Space) && _canInteractWithFlowers && currentFlower.GetComponent<FlowerGAction>().isReadyToHarvest)
         {
             HoneyState res = currentFlower.GetComponent<FlowerGAction>().UpdateBeeNumber();
             if (res == HoneyState.Ready)

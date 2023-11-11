@@ -13,18 +13,35 @@ public class EnemyController : MonoBehaviour
         findTarget();
     }
     
-    private void findTarget()
+    public void findTarget()
     {
-        _target = FlowerManager.Instance.getRandomAlly();
+        if (!_target)
+        {
+            _target = FlowerManager.Instance.getRandomAlly();
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.CompareTag("Flower"))
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void Update()
     {
-        Transform target = _target.transform;
-        Vector2 direction = target.position - transform.position;
+        if (_target)
+        {
+            Transform target = _target.transform;
+            Vector2 direction = target.position - transform.position;
 
-
-        transform.position =
-            Vector2.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
+            transform.position =
+                Vector2.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
+        }
+        else
+        {
+            findTarget();
+        }
     }
 }

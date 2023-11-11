@@ -23,6 +23,11 @@ public class FlowerManager : MonoBehaviour
         Instance.Allies.Add(id, ally);
     }
 
+    public static void Remove(int id)
+    {
+        Instance.Allies.Remove(id);
+    }
+
     public GameObject getRandomAlly()
     {
         System.Random rand = new System.Random();

@@ -23,14 +23,11 @@ public class enemyManager : MonoBehaviour
         Debug.Log(Instance.Enemies.Count);
     }
 
-    void Start()
+    public void ResetTargets()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        foreach (var x in Enemies)
+        {
+            x.Value.findTarget();
+        }
     }
 }

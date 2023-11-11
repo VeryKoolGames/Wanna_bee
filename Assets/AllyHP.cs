@@ -12,12 +12,14 @@ public class AllyHP : MonoBehaviour
     private void Start()
     {
         FlowerManager.Register(gameObject.GetInstanceID(), this);
+        Debug.Log("Hello I exist" + tag);
     }
 
     private void OnTriggerEnter2D(Collider2D col)
     {
         if (col.CompareTag("Enemy"))
         {
+            Debug.Log("ENNEMY PASSING THROUGH" + tag);
             loseHP();
             Destroy(col.gameObject);
         }
@@ -28,6 +30,8 @@ public class AllyHP : MonoBehaviour
         hp -= 10;
         if (hp <= 0)
         {
+            FlowerManager.Remove(gameObject.GetInstanceID());
+            enemyManager.Instance.ResetTargets();
             Destroy(gameObject);
             if (tag == "Player")
             {
