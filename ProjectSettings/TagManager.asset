@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Honey
   - Enemy
+  - Flower
   layers:
   - Default
   - TransparentFX

@@ -27,24 +27,6 @@ public class FlowerManager : MonoBehaviour
     {
         System.Random rand = new System.Random();
         GameObject test = Allies.ElementAt(rand.Next(0, Allies.Count)).Value.gameObject;
-        // foreach (KeyValuePair<int, AllyHP> kvp in Allies)
-        // {
-        //     Debug.Log(kvp.Key);
-        //     Debug.Log(kvp.Value);
-        // }
-        // Debug.Log(test);
         return test;
-    }
-    
-
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
