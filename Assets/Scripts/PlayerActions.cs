@@ -18,6 +18,8 @@ public class PlayerActions : MonoBehaviour
     [SerializeField] private List <GameObject> listOfBeeObject;
     [SerializeField] private GameObject flowerDObject;
     [SerializeField] private GameObject flowerTObject;
+    [SerializeField] private HoneySpawnMonitor spawnMonitor;
+
     private BoxCollider2D beeSpawnArena;
     private bool _canPlantFlowers = true;
     private bool _canInteractWithFlowers = true;
@@ -38,7 +40,7 @@ public class PlayerActions : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.CompareTag("ressource"))
+        if (col.CompareTag("Honey"))
         {
             ressourceCounter += 5;
             _counterHandler.updateHoneyCounter(ressourceCounter);
