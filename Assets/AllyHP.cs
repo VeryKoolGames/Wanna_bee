@@ -7,19 +7,16 @@ using UnityEngine.SceneManagement;
 public class AllyHP : MonoBehaviour
 {
     [SerializeField] private float hp = 20;
-    // Start is called before the first frame update
 
     private void Start()
     {
         FlowerManager.Register(gameObject.GetInstanceID(), this);
-        Debug.Log("Hello I exist" + tag);
     }
 
     private void OnTriggerEnter2D(Collider2D col)
     {
         if (col.CompareTag("Enemy"))
         {
-            Debug.Log("ENNEMY PASSING THROUGH" + tag);
             loseHP();
             Destroy(col.gameObject);
         }
@@ -27,6 +24,15 @@ public class AllyHP : MonoBehaviour
 
     private void loseHP()
     {
+        if (CompareTag("Player"))
+        {
+            PlayerActions playerActions = gameObject.GetComponent<PlayerActions>();
+            if (playerActions.beeCounter > 0)
+            {
+                createShieldEffect();
+                playerActions.removeBees();
+            }
+        }
         hp -= 10;
         if (hp <= 0)
         {
@@ -40,4 +46,8 @@ public class AllyHP : MonoBehaviour
         }
     }
 
+    private void createShieldEffect()
+    {
+        throw new NotImplementedException();
+    }
 }

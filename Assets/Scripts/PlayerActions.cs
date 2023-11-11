@@ -5,6 +5,7 @@ using System.Security.Cryptography;
 using DefaultNamespace;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
 
 public class PlayerActions : MonoBehaviour
@@ -25,6 +26,7 @@ public class PlayerActions : MonoBehaviour
     private int countCollider;
     private bool _canPlantFlowers = true;
     private bool _canInteractWithFlowers = true;
+    private bool _canInteractWithEnd = true;
     private CounterHandler _counterHandler;
 
     private void Awake()
@@ -59,7 +61,12 @@ public class PlayerActions : MonoBehaviour
         {
             _canPlantFlowers = true;
         }
+        else if (other.CompareTag("End"))
+        {
+            _canInteractWithEnd = false;
+        }
     }
+    
     private void OnTriggerEnter2D(Collider2D col)
     {
         if (col.CompareTag("Honey"))
@@ -77,6 +84,10 @@ public class PlayerActions : MonoBehaviour
         else if (col.CompareTag("FlowerSpawn"))
         {
             _canPlantFlowers = false;
+        }
+        else if (col.CompareTag("End"))
+        {
+            _canInteractWithEnd = true;
         }
     }
 
@@ -120,6 +131,15 @@ public class PlayerActions : MonoBehaviour
         GameObject res = Instantiate(beeObject, GetRandomPointInCollider(beeSpawnArena), Quaternion.identity, transform);
         listOfBeeObject.Add(res);
     }
+
+    public void removeBees()
+    {
+        int max = 5 > listOfBeeObject.Count ? 5 : listOfBeeObject.Count;
+        for (int i = 0; i < max; i++)
+        {
+            listOfBeeObject.RemoveAt(0);
+        }
+    }
     
     private void FeedFlowers()
     {
@@ -149,6 +169,15 @@ public class PlayerActions : MonoBehaviour
         }
     }
 
+    private void CompleteGame()
+    {
+        if (Input.GetKeyDown(KeyCode.Space) && _canInteractWithEnd && ressourceCounter >= 200)
+        {
+            Debug.Log("Gg you win");
+            SceneManager.LoadScene("0");
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -156,5 +185,6 @@ public class PlayerActions : MonoBehaviour
         SpawnFlower();
         FeedFlowers();
         HarvestFlowers();
+        CompleteGame();
     }
 }
