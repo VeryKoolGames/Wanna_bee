@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Honey
   - Spawn
+  - Enemy
+  - Flower
   layers:
   - Default
   - TransparentFX

@@ -1,68 +1,128 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
+using DefaultNamespace;
+using Unity.VisualScripting;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class PlayerActions : MonoBehaviour
 {
-    public float beeCounter = 0f; 
-    public float ressourceCounter = 60f;
+    public int beeCounter = 0; 
+    public int ressourceCounter = 60;
+    private GameObject currentFlower;
 
+    [SerializeField] private int maxBee = 50;
     [SerializeField] private GameObject beeObject;
+    [SerializeField] private List <GameObject> listOfBeeObject;
     [SerializeField] private GameObject flowerDObject;
     [SerializeField] private GameObject flowerTObject;
-
     [SerializeField] private HoneySpawnMonitor spawnMonitor;
-    private BoxCollider beeSpawnArena;
-    private bool _canPlantFlower = true;
-    
+
+    private BoxCollider2D beeSpawnArena;
+    private bool _canPlantFlowers = true;
+    private bool _canInteractWithFlowers = true;
+    private CounterHandler _counterHandler;
+
+    private void Awake()
+    {
+        listOfBeeObject = new List<GameObject>(maxBee);
+        _counterHandler = FindObjectOfType<CounterHandler>();
+    }
 
     private void Start()
     {
-        beeSpawnArena = GetComponent<BoxCollider>();
-        spawnMonitor = FindObjectOfType<HoneySpawnMonitor>();
+        _counterHandler.updateHoneyCounter(ressourceCounter);
+        _counterHandler.updateBeeCounter(beeCounter);
+        beeSpawnArena = GetComponent<BoxCollider2D>();
     }
 
-    private void OnTriggerEnter(Collider col)
+    private void OnTriggerEnter2D(Collider2D col)
     {
         if (col.CompareTag("Honey"))
         {
-            Debug.Log("TOUCHÉ DA HONEY");
             ressourceCounter += 5;
+            _counterHandler.updateHoneyCounter(ressourceCounter);
             Destroy(col.gameObject);
         }
+        else if (col.CompareTag("Flower"))
+        {
+            _canPlantFlowers = false;
+            _canInteractWithFlowers = true;
+            currentFlower = col.gameObject;
+            col.gameObject.GetComponent<FlowerGAction>().ShowBeeUI();
+        }
     }
-    
-    private static Vector3 RandomPointInBounds(Bounds bounds) {
-        return new Vector3(
-            Random.Range(bounds.min.x, bounds.max.x),
-            Random.Range(bounds.min.y, bounds.max.y),
-            Random.Range(bounds.min.z, bounds.max.z)
-        );
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.CompareTag("Flower"))
+        {
+            _canPlantFlowers = true;
+            _canInteractWithFlowers = false;
+            currentFlower = null;
+            other.gameObject.GetComponent<FlowerGAction>().HideBeeUI();
+        }
+    }
+
+    public Vector2 GetRandomPointInCollider(BoxCollider2D boxCollider)
+    {
+        Vector2 center = boxCollider.bounds.center;
+        Vector2 size = boxCollider.bounds.size;
+
+        float randomX = Random.Range(center.x - size.x / 2, center.x + size.x / 2);
+        float randomY = Random.Range(center.y - size.y / 2, center.y + size.y / 2);
+
+        return new Vector2(randomX, randomY);
     }
 
     private void SpawnFlower()
     {
-        if (!(ressourceCounter >= 20) || !_canPlantFlower) return;
+        if (!(ressourceCounter >= 20) || !_canPlantFlowers) return;
         if (Input.GetKeyDown("1"))
         {
-            Instantiate(flowerDObject, RandomPointInBounds(beeSpawnArena.bounds), Quaternion.identity);
+            Instantiate(flowerDObject, GetRandomPointInCollider(beeSpawnArena), Quaternion.identity);
             ressourceCounter -= 20;
+            _counterHandler.updateHoneyCounter(ressourceCounter);
         }
         else if (Input.GetKeyDown("2"))
         {
-            Instantiate(flowerTObject, RandomPointInBounds(beeSpawnArena.bounds), Quaternion.identity);
+            Instantiate(flowerTObject, GetRandomPointInCollider(beeSpawnArena), Quaternion.identity);
             ressourceCounter -= 20;
+            _counterHandler.updateHoneyCounter(ressourceCounter);
         }
     }
 
     private void SpawnBee()
     {
-        if (!Input.GetKeyDown(KeyCode.E) || !(ressourceCounter >= 5)) return;
+        if (!Input.GetKeyDown(KeyCode.E) || !(ressourceCounter >= 5) || beeCounter >= maxBee) return;
         ressourceCounter -= 5;
         beeCounter += 1;
-        Instantiate(beeObject, RandomPointInBounds(beeSpawnArena.bounds), Quaternion.identity, transform);
+        _counterHandler.updateBeeCounter(beeCounter);
+        _counterHandler.updateHoneyCounter(ressourceCounter);
+        GameObject res = Instantiate(beeObject, GetRandomPointInCollider(beeSpawnArena), Quaternion.identity, transform);
+        listOfBeeObject.Add(res);
+    }
+    
+    private void FeedFlowers()
+    {
+        if (Input.GetKeyDown(KeyCode.Space) && _canInteractWithFlowers && beeCounter > 0)
+        {
+            HoneyState res = currentFlower.GetComponent<FlowerGAction>().UpdateBeeNumber();
+            if (res == HoneyState.Added)
+            {
+                beeCounter -= 1;
+                _counterHandler.updateBeeCounter(beeCounter);
+                Destroy(listOfBeeObject[0]);
+                listOfBeeObject.RemoveAt(0);
+            }
+            else if (res == HoneyState.Ready)
+            {
+                ressourceCounter += 20;
+                _counterHandler.updateHoneyCounter(ressourceCounter);
+            }
+        }
     }
 
     // Update is called once per frame
@@ -70,5 +130,6 @@ public class PlayerActions : MonoBehaviour
     {
         SpawnBee();
         SpawnFlower();
+        FeedFlowers();
     }
 }
