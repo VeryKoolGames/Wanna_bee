@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class AllyHP : MonoBehaviour
 {
@@ -28,6 +29,10 @@ public class AllyHP : MonoBehaviour
         if (hp <= 0)
         {
             Destroy(gameObject);
+            if (tag == "Player")
+            {
+                SceneManager.LoadScene(2);
+            }
         }
     }
 

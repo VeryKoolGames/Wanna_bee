@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography;
+using DefaultNamespace;
 using Unity.VisualScripting;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -48,7 +49,7 @@ public class PlayerActions : MonoBehaviour
             _canPlantFlowers = false;
             _canInteractWithFlowers = true;
             currentFlower = col.gameObject;
-            col.gameObject.GetComponent<FlowerGAction>().showBeeUI();
+            col.gameObject.GetComponent<FlowerGAction>().ShowBeeUI();
         }
     }
 
@@ -59,7 +60,7 @@ public class PlayerActions : MonoBehaviour
             _canPlantFlowers = true;
             _canInteractWithFlowers = false;
             currentFlower = null;
-            other.gameObject.GetComponent<FlowerGAction>().hideBeeUI();
+            other.gameObject.GetComponent<FlowerGAction>().HideBeeUI();
         }
     }
 
@@ -106,13 +107,18 @@ public class PlayerActions : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space) && _canInteractWithFlowers && beeCounter > 0)
         {
-            bool res = currentFlower.GetComponent<FlowerGAction>().updateBeeNumber();
-            if (res)
+            HoneyState res = currentFlower.GetComponent<FlowerGAction>().UpdateBeeNumber();
+            if (res == HoneyState.Added)
             {
                 beeCounter -= 1;
                 _counterHandler.updateBeeCounter(beeCounter);
                 Destroy(listOfBeeObject[0]);
                 listOfBeeObject.RemoveAt(0);
+            }
+            else if (res == HoneyState.Ready)
+            {
+                ressourceCounter += 20;
+                _counterHandler.updateHoneyCounter(ressourceCounter);
             }
         }
     }
