@@ -7,19 +7,19 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private float moveSpeed = 23f;
 
-    private Rigidbody rb;
+    private Rigidbody2D rb;
 
     private Vector2 movementDirection;
     // Start is called before the first frame update
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
+        rb = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        movementDirection = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0f);
+        movementDirection = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
     }
 
     private void FixedUpdate()
