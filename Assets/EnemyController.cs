@@ -7,7 +7,6 @@ public class EnemyController : MonoBehaviour
 {
     private GameObject _target;
     [SerializeField] private float speed = 3f;
-    // Start is called before the first frame update
     void Start()
     {
         enemyManager.Register(gameObject.GetInstanceID(), this);
