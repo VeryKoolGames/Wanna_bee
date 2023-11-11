@@ -10,6 +10,8 @@ TagManager:
   - Flower
   - FlowerSpawn
   - FT
+  - PlayerLerp
+  - End
   layers:
   - Default
   - TransparentFX

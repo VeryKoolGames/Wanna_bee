@@ -8,10 +8,16 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
 
+[Serializable]
+public class KeyValuePair {
+    public int key;
+    public Animator val;
+}
+
 public class PlayerActions : MonoBehaviour
 {
     public int beeCounter = 0; 
-    public int ressourceCounter = 60;
+    public int ressourceCounter = 0;
     private GameObject currentFlower;
 
     [SerializeField] private int maxBee = 50;
@@ -20,6 +26,8 @@ public class PlayerActions : MonoBehaviour
     [SerializeField] private GameObject flowerDObject;
     [SerializeField] private GameObject flowerTObject;
     [SerializeField] private HoneySpawnMonitor spawnMonitor;
+    public List<KeyValuePair> MyList = new List<KeyValuePair>();
+    private Dictionary<int, Animator> Animations = new Dictionary<int, Animator>();
 
     private BoxCollider2D beeSpawnArena;
     private HoneyState currentFlowerState;
@@ -31,6 +39,9 @@ public class PlayerActions : MonoBehaviour
 
     private void Awake()
     {
+        foreach (var kvp in MyList) {
+            Animations[kvp.key] = kvp.val;
+        }
         listOfBeeObject = new List<GameObject>(maxBee);
         _counterHandler = FindObjectOfType<CounterHandler>();
     }
@@ -71,7 +82,7 @@ public class PlayerActions : MonoBehaviour
     {
         if (col.CompareTag("Honey"))
         {
-            ressourceCounter += 5;
+            _setRessources(ressourceCounter + 5);
             _counterHandler.updateHoneyCounter(ressourceCounter);
             Destroy(col.gameObject);
         }
@@ -104,19 +115,35 @@ public class PlayerActions : MonoBehaviour
         return new Vector2(randomX, randomY);
     }
 
+    private void _setRessources(int newValue)
+    {
+        foreach (var x in Animations)
+        {
+            if (newValue >= x.Key && ressourceCounter < x.Key)
+            {
+                x.Value.SetBool("isTrigger", true);
+            }
+            else if (newValue <= x.Key && ressourceCounter >= x.Key)
+            {
+                x.Value.SetBool("isTrigger", false);
+            }
+        }
+        ressourceCounter = newValue;
+    }
+
     private void SpawnFlower()
     {
         if (!(ressourceCounter >= 20) || !_canPlantFlowers) return;
         if (Input.GetKeyDown("1"))
         {
             Instantiate(flowerDObject, GetRandomPointInCollider(beeSpawnArena), Quaternion.identity);
-            ressourceCounter -= 20;
+            _setRessources(ressourceCounter - 20);
             _counterHandler.updateHoneyCounter(ressourceCounter);
         }
         else if (Input.GetKeyDown("2"))
         {
             Instantiate(flowerTObject, GetRandomPointInCollider(beeSpawnArena), Quaternion.identity);
-            ressourceCounter -= 20;
+            _setRessources(ressourceCounter - 20);
             _counterHandler.updateHoneyCounter(ressourceCounter);
         }
     }
@@ -124,7 +151,7 @@ public class PlayerActions : MonoBehaviour
     private void SpawnBee()
     {
         if (!Input.GetKeyDown(KeyCode.E) || !(ressourceCounter >= 5) || beeCounter >= maxBee) return;
-        ressourceCounter -= 5;
+        _setRessources(ressourceCounter - 5);
         beeCounter += 1;
         _counterHandler.updateBeeCounter(beeCounter);
         _counterHandler.updateHoneyCounter(ressourceCounter);
@@ -163,7 +190,7 @@ public class PlayerActions : MonoBehaviour
             HoneyState res = currentFlower.GetComponent<FlowerGAction>().UpdateBeeNumber();
             if (res == HoneyState.Ready)
             {
-                ressourceCounter += 20;
+                _setRessources(ressourceCounter + 20);
                 _counterHandler.updateHoneyCounter(ressourceCounter);
             }
         }
