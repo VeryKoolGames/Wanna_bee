@@ -70,6 +70,7 @@ MonoBehaviour:
   - {fileID: 9059560514805072750}
   - {fileID: 7822336312809682463}
   canvasBeeUI: {fileID: 7584033210609788542}
+  canvasHarvestUI: {fileID: 8335491030716223564, guid: 8322c29f5530f1d4788b20be6df8bd66, type: 3}
 --- !u!61 &4672920039114632173
 BoxCollider2D:
   m_ObjectHideFlags: 0

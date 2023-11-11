@@ -871,7 +871,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   beeCounter: 0
   ressourceCounter: 60
+  maxBee: 50
   beeObject: {fileID: 560531961778166672, guid: d7b14d8612c977c4685c8abf2b12f146, type: 3}
+  listOfBeeObject: []
   flowerDObject: {fileID: 7600789006712951, guid: b225dbd045294f84aa3f884a2cb00223, type: 3}
   flowerTObject: {fileID: 2850250213355144856, guid: da38abddb386e904198b4532315932e6, type: 3}
 --- !u!114 &924288458

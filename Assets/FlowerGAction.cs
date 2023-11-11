@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DefaultNamespace;
 using UnityEngine;
 
 public class FlowerGAction : MonoBehaviour
@@ -11,47 +12,62 @@ public class FlowerGAction : MonoBehaviour
     public bool isReadyToHarvest = false;
     [SerializeField] private List<GameObject> beeUI = new List<GameObject>(5);
     [SerializeField] private GameObject canvasBeeUI;
-    // Start is called before the first frame update
+    [SerializeField] private GameObject canvasHarvestUI;
 
-    private void updateBeeUI()
+    private void UpdateBeeUI()
     {
         beeUI[beeNumber].SetActive(true);
     }
-    
-    public void showBeeUI()
+
+    public void ShowBeeUI()
     {
-        canvasBeeUI.SetActive(true);
+        if (!isReadyToHarvest)
+        {
+            canvasBeeUI.SetActive(true);
+        }
     }
     
-    public void hideBeeUI()
+    public void HideBeeUI()
     {
-        canvasBeeUI.SetActive(false);
+        if (!isReadyToHarvest)
+        {
+            canvasBeeUI.SetActive(false);
+        }
     }
 
     private void Start()
     {
-        startLaunchGrowth();
+        _startLaunchGrowth();
     }
 
-    public bool updateBeeNumber()
+    public HoneyState UpdateBeeNumber()
     {
+        HoneyState res = HoneyState.Full;
+        if (isReadyToHarvest)
+        {
+            res = HoneyState.Ready;
+            _startLaunchGrowth();
+        }
         if (beeNumber < 5)
         {
-            updateBeeUI();
+            UpdateBeeUI();
             beeNumber++;
-            return true;
+            res = HoneyState.Added;
         }
 
-        return false;
+        return res;
     }
 
-    public void startLaunchGrowth()
+    private void _startLaunchGrowth()
     {
-        isReadyToHarvest = true;
-        StartCoroutine(launchGrowthTimer());
+        currentState = 0;
+        isReadyToHarvest = false;
+        canvasBeeUI.SetActive(true);
+        canvasHarvestUI.SetActive(false);
+        StartCoroutine(LaunchGrowthTimer());
     }
-    
-    public IEnumerator launchGrowthTimer()
+
+    private IEnumerator LaunchGrowthTimer()
     {
         while (!isReadyToHarvest)
         {
@@ -59,6 +75,8 @@ public class FlowerGAction : MonoBehaviour
             if (currentState >= timeToProduce)
             {
                 isReadyToHarvest = true;
+                canvasBeeUI.SetActive(false);
+                canvasHarvestUI.SetActive(true);
             }
             yield return new WaitForSeconds(1f);
         }
