@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class FlowerGAction : MonoBehaviour
 {
-    private float timeToProduce = 200;
+    [SerializeField] private float timeToProduce = 200f;
     private float currentState = 0;
     private int beeNumber = 0;
     public bool isReadyToHarvest = false;
@@ -43,12 +43,13 @@ public class FlowerGAction : MonoBehaviour
     public HoneyState UpdateBeeNumber()
     {
         HoneyState res = HoneyState.Full;
+        Debug.Log(isReadyToHarvest);
         if (isReadyToHarvest)
         {
             res = HoneyState.Ready;
             _startLaunchGrowth();
         }
-        if (beeNumber < 5)
+        else if (beeNumber < 5)
         {
             UpdateBeeUI();
             beeNumber++;

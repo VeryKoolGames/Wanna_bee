@@ -8,11 +8,13 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float moveSpeed = 23f;
 
     private Rigidbody2D rb;
+    private PlayerActions playerScript;
 
     private Vector2 movementDirection;
     // Start is called before the first frame update
     void Start()
     {
+        playerScript = GetComponent<PlayerActions>();
         rb = GetComponent<Rigidbody2D>();
     }
 
@@ -24,6 +26,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        rb.velocity = movementDirection * moveSpeed;
+        rb.velocity = movementDirection * (moveSpeed - playerScript.getBeeCounter() / 3);
     }
 }
