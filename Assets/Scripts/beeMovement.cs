@@ -6,7 +6,7 @@ using Random = UnityEngine.Random;
 
 public class beeMovement : MonoBehaviour
 {
-    [SerializeField] private float speed = 700f;
+    [SerializeField] private float speed = 70f;
     private BoxCollider2D _playerCollider;
     private Vector2 _dest;
 

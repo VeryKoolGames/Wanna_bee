@@ -5,7 +5,7 @@ using UnityEngine;
 public class enemySpawner : MonoBehaviour
 {
     [SerializeField] private GameObject enemyPrefab;
-    [SerializeField] private List<BoxCollider2D> spawnZones = new List<BoxCollider2D>(1);
+    [SerializeField] private List<BoxCollider2D> spawnZones = new List<BoxCollider2D>(4);
 
     [SerializeField] private float spawningRate = 20f;
 
