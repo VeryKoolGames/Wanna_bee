@@ -21,14 +21,6 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D col)
-    {
-        if (col.CompareTag("Flower"))
-        {
-            Destroy(gameObject);
-        }
-    }
-
     private void Update()
     {
         if (_target)

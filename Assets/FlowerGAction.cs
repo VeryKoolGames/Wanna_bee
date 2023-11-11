@@ -26,9 +26,10 @@ public class FlowerGAction : MonoBehaviour
     {
         if (!isReadyToHarvest)
         {
-            spriteRendered.sprite = highlightedSprite;
             canvasBeeUI.SetActive(true);
         }
+        spriteRendered.sprite = highlightedSprite;
+        spriteRendered.sortingOrder = 5;
     }
     
     public void HideBeeUI()
@@ -36,8 +37,8 @@ public class FlowerGAction : MonoBehaviour
         if (!isReadyToHarvest)
         {
             canvasBeeUI.SetActive(false);
-            spriteRendered.sprite = normalSprite;
         }
+        spriteRendered.sprite = normalSprite;
     }
 
     private void Start()
