@@ -12,19 +12,26 @@ public class PlayerActions : MonoBehaviour
     [SerializeField] private GameObject beeObject;
     [SerializeField] private GameObject flowerDObject;
     [SerializeField] private GameObject flowerTObject;
+
+    [SerializeField] private HoneySpawnMonitor spawnMonitor;
     private BoxCollider beeSpawnArena;
     private bool _canPlantFlower = true;
+    
 
     private void Start()
     {
         beeSpawnArena = GetComponent<BoxCollider>();
+        spawnMonitor = FindObjectOfType<HoneySpawnMonitor>();
     }
 
     private void OnTriggerEnter(Collider col)
     {
-        if (!col.CompareTag("ressource")) return;
-        ressourceCounter += 5;
-        Destroy(col.gameObject);
+        if (col.CompareTag("Honey"))
+        {
+            Debug.Log("TOUCHÉ DA HONEY");
+            ressourceCounter += 5;
+            Destroy(col.gameObject);
+        }
     }
     
     private static Vector3 RandomPointInBounds(Bounds bounds) {
