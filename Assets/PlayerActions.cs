@@ -7,10 +7,13 @@ using Random = UnityEngine.Random;
 public class PlayerActions : MonoBehaviour
 {
     public float beeCounter = 0f; 
-    public float ressourceCounter = 20f;
+    public float ressourceCounter = 60f;
 
     [SerializeField] private GameObject beeObject;
+    [SerializeField] private GameObject flowerDObject;
+    [SerializeField] private GameObject flowerTObject;
     private BoxCollider beeSpawnArena;
+    private bool _canPlantFlower = true;
 
     private void Start()
     {
@@ -19,11 +22,9 @@ public class PlayerActions : MonoBehaviour
 
     private void OnTriggerEnter(Collider col)
     {
-        if (col.CompareTag("ressource"))
-        {
-            ressourceCounter += 5;
-            Destroy(col.gameObject);
-        }
+        if (!col.CompareTag("ressource")) return;
+        ressourceCounter += 5;
+        Destroy(col.gameObject);
     }
     
     private static Vector3 RandomPointInBounds(Bounds bounds) {
@@ -34,13 +35,33 @@ public class PlayerActions : MonoBehaviour
         );
     }
 
+    private void SpawnFlower()
+    {
+        if (!(ressourceCounter >= 20) || !_canPlantFlower) return;
+        if (Input.GetKeyDown("1"))
+        {
+            Instantiate(flowerDObject, RandomPointInBounds(beeSpawnArena.bounds), Quaternion.identity);
+            ressourceCounter -= 20;
+        }
+        else if (Input.GetKeyDown("2"))
+        {
+            Instantiate(flowerTObject, RandomPointInBounds(beeSpawnArena.bounds), Quaternion.identity);
+            ressourceCounter -= 20;
+        }
+    }
+
+    private void SpawnBee()
+    {
+        if (!Input.GetKeyDown(KeyCode.E) || !(ressourceCounter >= 5)) return;
+        ressourceCounter -= 5;
+        beeCounter += 1;
+        Instantiate(beeObject, RandomPointInBounds(beeSpawnArena.bounds), Quaternion.identity, transform);
+    }
+
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E) && ressourceCounter >= 5)
-        {
-            ressourceCounter -= 5;
-            Instantiate(beeObject, RandomPointInBounds(beeSpawnArena.bounds), Quaternion.identity, transform);
-        }
+        SpawnBee();
+        SpawnFlower();
     }
 }

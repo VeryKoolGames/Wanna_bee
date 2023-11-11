@@ -5,6 +5,8 @@ using UnityEngine;
 public class beeMovement : MonoBehaviour
 {
     [SerializeField] private float speed = 70f;
+
+    private Vector3 target;
     // Start is called before the first frame update
     void Start()
     {
