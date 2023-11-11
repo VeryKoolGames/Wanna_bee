@@ -31,6 +31,11 @@ public class PlayerActions : MonoBehaviour
         _counterHandler = FindObjectOfType<CounterHandler>();
     }
 
+    public int getBeeCounter()
+    {
+        return beeCounter;
+    }
+
     private void Start()
     {
         _counterHandler.updateHoneyCounter(ressourceCounter);
@@ -117,7 +122,15 @@ public class PlayerActions : MonoBehaviour
                 Destroy(listOfBeeObject[0]);
                 listOfBeeObject.RemoveAt(0);
             }
-            else if (res == HoneyState.Ready)
+        }
+    }
+
+    private void HarvestFlowers()
+    {
+        if (Input.GetKeyDown(KeyCode.Space) && _canInteractWithFlowers)
+        {
+            HoneyState res = currentFlower.GetComponent<FlowerGAction>().UpdateBeeNumber();
+            if (res == HoneyState.Ready)
             {
                 ressourceCounter += 20;
                 _counterHandler.updateHoneyCounter(ressourceCounter);
@@ -131,5 +144,6 @@ public class PlayerActions : MonoBehaviour
         SpawnBee();
         SpawnFlower();
         FeedFlowers();
+        HarvestFlowers();
     }
 }
