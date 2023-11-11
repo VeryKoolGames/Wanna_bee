@@ -9,6 +9,7 @@ TagManager:
   - Enemy
   - Flower
   - FlowerSpawn
+  - FT
   layers:
   - Default
   - TransparentFX
