@@ -8,6 +8,7 @@ public class EndingManager : MonoBehaviour
     [SerializeField] private Sprite baseSprite;
     [SerializeField] private Sprite highlightSprite;
     [SerializeField] private GameObject finalSprite;
+    [SerializeField] private GameObject popUp;
     // Start is called before the first frame update
 
     public void setFinalSprite()
@@ -16,11 +17,13 @@ public class EndingManager : MonoBehaviour
     }
     public void highlightTree()
     {
+        popUp.SetActive(true);
         treeRenderer.sprite = highlightSprite;
     }
     
     public void baseTree()
     {
+        popUp.SetActive(false);
         treeRenderer.sprite = baseSprite;
     }
     

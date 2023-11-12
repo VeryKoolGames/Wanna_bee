@@ -9,6 +9,7 @@ public class AllyHP : MonoBehaviour
     [SerializeField] private float hp = 20;
     [SerializeField] private enemySpawner _enemySpawner;
     [SerializeField] private GameObject gameOverCanvas;
+    [SerializeField] private int oldId;
 
     private void Start()
     {
@@ -22,6 +23,7 @@ public class AllyHP : MonoBehaviour
             AudioManager.Instance.playSound("HitHurt1");
             loseHP();
             Destroy(col.gameObject);
+            enemyManager.Instance.RemoveEnemy(col.gameObject.GetInstanceID());
         }
     }
 

@@ -133,9 +133,9 @@ GameObject:
   m_Component:
   - component: {fileID: 82674276}
   - component: {fileID: 82674277}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: Cube (1)
-  m_TagString: Untagged
+  m_TagString: MapLimit
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1156,9 +1156,9 @@ GameObject:
   - component: {fileID: 784854542}
   - component: {fileID: 784854545}
   - component: {fileID: 784854546}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: Cube
-  m_TagString: Untagged
+  m_TagString: MapLimit
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6547,9 +6547,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1109665357}
   - component: {fileID: 1109665358}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: Cube (2)
-  m_TagString: Untagged
+  m_TagString: MapLimit
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6626,6 +6626,7 @@ GameObject:
   - component: {fileID: 1143976501}
   - component: {fileID: 1143976500}
   - component: {fileID: 1143976504}
+  - component: {fileID: 1143976505}
   m_Layer: 0
   m_Name: Pixel Perfect Camera
   m_TagString: Untagged
@@ -6736,6 +6737,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pixelArtFilter: {fileID: 4800000, guid: 40f888868bff54e489d63cf2a046892c, type: 3}
   downSamples: 1
+--- !u!81 &1143976505
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1143976499}
+  m_Enabled: 1
 --- !u!1001 &1165039347
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7964,9 +7973,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1607917457}
   - component: {fileID: 1607917458}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: Cube (3)
-  m_TagString: Untagged
+  m_TagString: MapLimit
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

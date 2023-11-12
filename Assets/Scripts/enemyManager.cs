@@ -20,7 +20,11 @@ public class enemyManager : MonoBehaviour
         }
  
         Instance.Enemies.Add(id, enemy);
-        Debug.Log(Instance.Enemies.Count);
+    }
+    
+    public void RemoveEnemy(int id)
+    {
+        Enemies.Remove(id);
     }
 
     public void ResetTargets()
