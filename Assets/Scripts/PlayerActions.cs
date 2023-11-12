@@ -5,11 +5,11 @@ using System.Security.Cryptography;
 using DefaultNamespace;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Rendering.UI;
 using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
 
-[Serializable]
-public class KeyValuePair {
+[Serializable] public class KeyValuePair {
     public int key;
     public Animator val;
 }
@@ -86,6 +86,8 @@ public class PlayerActions : MonoBehaviour
     {
         if (col.CompareTag("Honey"))
         {
+            AudioManager.Instance.playSound("Collectible");
+            Debug.Log("HONEYYYY");
             _setRessources(ressourceCounter + 5);
             _counterHandler.updateHoneyCounter(ressourceCounter);
             Destroy(col.gameObject);
@@ -141,12 +143,14 @@ public class PlayerActions : MonoBehaviour
         if (!(ressourceCounter >= 20) || !_canPlantFlowers) return;
         if (Input.GetKeyDown("1"))
         {
+            AudioManager.Instance.playSound("ButtonClick");
             Instantiate(flowerDObject, GetRandomPointInCollider(beeSpawnArena), Quaternion.identity);
             _setRessources(ressourceCounter - 20);
             _counterHandler.updateHoneyCounter(ressourceCounter);
         }
         else if (Input.GetKeyDown("2"))
         {
+            AudioManager.Instance.playSound("ButtonClick");
             Instantiate(flowerTObject, GetRandomPointInCollider(beeSpawnArena), Quaternion.identity);
             _setRessources(ressourceCounter - 20);
             _counterHandler.updateHoneyCounter(ressourceCounter);
@@ -156,6 +160,7 @@ public class PlayerActions : MonoBehaviour
     private void SpawnBee()
     {
         if (!Input.GetKeyDown(KeyCode.E) || !(ressourceCounter >= 5) || beeCounter >= maxBee) return;
+        AudioManager.Instance.playSound("BeePop");
         _setRessources(ressourceCounter - 5);
         beeCounter += 1;
         _counterHandler.updateBeeCounter(beeCounter);
@@ -180,6 +185,7 @@ public class PlayerActions : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space) && _canInteractWithFlowers && !_canInteractWithEnd)
         {
+            AudioManager.Instance.playSound("ButtonClick");
             FlowerGAction flowerScript = currentFlower.GetComponent<FlowerGAction>();
             if (beeCounter > 0 && !flowerScript.isReadyToHarvest)
             {
@@ -197,7 +203,7 @@ public class PlayerActions : MonoBehaviour
             }
         }
     }
-
+    
     private void CompleteGame()
     {
         if (Input.GetKeyDown(KeyCode.Space) && _canInteractWithEnd && ressourceCounter >= ressourceToEnd)

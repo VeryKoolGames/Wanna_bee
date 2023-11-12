@@ -19,6 +19,7 @@ public class AllyHP : MonoBehaviour
     {
         if (col.CompareTag("Enemy"))
         {
+            AudioManager.Instance.playSound("HitHurt1");
             loseHP();
             Destroy(col.gameObject);
         }

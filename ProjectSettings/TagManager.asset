@@ -13,6 +13,7 @@ TagManager:
   - PlayerLerp
   - End
   - MapLimit
+  - AudioManager
   layers:
   - Default
   - TransparentFX
