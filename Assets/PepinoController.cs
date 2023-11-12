@@ -6,11 +6,15 @@ public class PepinoController : MonoBehaviour
 {
     [SerializeField] private float pepinoSpeed = 3.5f;
     private GameObject _target;
-    
-    // Start is called before the first frame update
-    void Start()
+    private GameObject _audioManager;
+
+    private GameObject test;
+    private void Start()
     {
-        // Debug.Log("Pepino Target is : " + getTargetTag()); // get target ok
+        // test = GameObject.FindWithTag("Respawn");
+        // _audioManager = GameObject.FindWithTag("AudioManager");
+        // _audioManager.SetActive(true);
+        // _audioManager.GetComponent<AudioManager>().playSound("ButtonClick");
     }
 
     // Update is called once per frame
@@ -29,6 +33,7 @@ public class PepinoController : MonoBehaviour
     {
         if (col.CompareTag("Enemy")) // only works if rigidbody on enemy !
         {
+            AudioManager.Instance.playSound("HitHurt2");
             Destroy(col.transform.gameObject);
             // Debug.Log("P: Enemy Down");
         }
@@ -37,7 +42,7 @@ public class PepinoController : MonoBehaviour
     public void setTarget(GameObject target)
     {
         _target = target;
-        // Debug.Log("I got set target pepino : " + _target.tag); // this works, but does not seem to save target
+        Debug.Log("I got set target pepino : " + _target.tag); // this works, but does not seem to save target
     }
 
     public string getTargetTag()

@@ -5,3 +5,10 @@ Flower T1 as Prefab is the one
 On Flower T1 (FT1), there's an empty Script, it's ok
 Radar (a prefab) is FT1's child, "Flower T Radar" takes Pepino, another prefab, and detects collider with enemy and instantiate pepino when OnTriggerEnter2D.
 On Pepino (prefab) there is a script (PepinoController) : It follows enemy, destroys enemy, and self-destroys when enemy is deleted.
+
+    private GameObject _audioManager;
+    private void Start()
+    {
+        _audioManager = GameObject.FindWithTag("AudioManager");
+        // _audioManager.GetComponent<AudioManager>().playSound("ButtonClick");
+    }
