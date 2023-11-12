@@ -12,6 +12,7 @@ TagManager:
   - FT
   - PlayerLerp
   - End
+  - AudioManager
   layers:
   - Default
   - TransparentFX

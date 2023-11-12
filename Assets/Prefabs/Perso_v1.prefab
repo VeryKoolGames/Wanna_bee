@@ -105,11 +105,13 @@ MonoBehaviour:
   beeCounter: 0
   ressourceCounter: 0
   maxBee: 50
+  ressourceToEnd: 50
   beeObject: {fileID: 4386525804275964288, guid: 18889ae13bef14605b05569c0b6aa91d, type: 3}
   listOfBeeObject: []
   flowerDObject: {fileID: 7600789006712951, guid: b225dbd045294f84aa3f884a2cb00223, type: 3}
-  flowerTObject: {fileID: 2850250213355144856, guid: da38abddb386e904198b4532315932e6, type: 3}
+  flowerTObject: {fileID: 7600789006712951, guid: 392cb5d25d5bd4d25b6957e94ba4af69, type: 3}
   spawnMonitor: {fileID: 0}
+  _endingManager: {fileID: 0}
   MyList:
   - key: 5
     val: {fileID: 0}
@@ -143,6 +145,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hp: 20
+  _enemySpawner: {fileID: 0}
 --- !u!50 &5828484266366026489
 Rigidbody2D:
   serializedVersion: 4
