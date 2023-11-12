@@ -215,8 +215,8 @@ public class PlayerActions : MonoBehaviour
     public IEnumerator launchEndGame()
     {
         _endFade.SetTrigger("start");
-        enemySpawner.StopEnemiesSpawn();
-        enemyManager.Instance.KillAllEnemies();
+        // enemySpawner.StopEnemiesSpawn();
+        // enemyManager.Instance.KillAllEnemies();
         yield return new WaitForSeconds(1f);
         SceneManager.LoadScene(2);
     }
