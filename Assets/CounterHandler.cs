@@ -11,11 +11,11 @@ public class CounterHandler : MonoBehaviour
 
     public void updateBeeCounter(int count)
     {
-        beeCounterText.text = "bees: " + count;
+        beeCounterText.text = count.ToString();
     }
     
     public void updateHoneyCounter(int count)
     {
-        honeyCounterText.text = "honey: " + count;
+        honeyCounterText.text = count.ToString();
     }
 }
