@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8303113088437076754}
   - component: {fileID: 613797357219035734}
   - component: {fileID: 6639586453739025107}
+  - component: {fileID: -2000759726348039172}
   m_Layer: 0
   m_Name: FlowerT1
   m_TagString: FT
@@ -49,6 +50,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hp: 10
+  _enemySpawner: {fileID: 0}
 --- !u!61 &8303113088437076754
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -158,6 +160,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8911ff3025848b419791d90b4e53711, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &-2000759726348039172
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7600789006712951}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 5061bd1f7968a436fb7c7ee1263fea16, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &5982287849135935628
 GameObject:
   m_ObjectHideFlags: 0

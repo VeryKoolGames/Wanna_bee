@@ -11961,6 +11961,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1263145593}
     - target: {fileID: 6470894759614197537, guid: a502e6dc75554c54b99235035819dc00, type: 3}
+      propertyPath: ressourceToEnd
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 6470894759614197537, guid: a502e6dc75554c54b99235035819dc00, type: 3}
       propertyPath: ressourceCounter
       value: 50
       objectReference: {fileID: 0}
