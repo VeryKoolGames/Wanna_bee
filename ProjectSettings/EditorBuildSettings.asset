@@ -9,7 +9,7 @@ EditorBuildSettings:
     path: Assets/Scenes/StartMenu.unity
     guid: 9aa40b7f728d8e24fa81d2e79d8ea407
   - enabled: 1
-    path: Assets/Scenes/Benjamin Pour VIVI.unity
+    path: Assets/Scenes/MainScene.unity
     guid: ef8a644a241624527ac04eca4215c86f
   - enabled: 1
     path: Assets/Scenes/EndingScene.unity
