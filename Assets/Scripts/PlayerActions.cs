@@ -58,8 +58,8 @@ public class PlayerActions : MonoBehaviour
 
     private void Start()
     {
-        // _counterHandler.updateHoneyCounter(ressourceCounter);
-        // _counterHandler.updateBeeCounter(beeCounter);
+        _counterHandler.updateHoneyCounter(ressourceCounter);
+        _counterHandler.updateBeeCounter(beeCounter);
         beeSpawnArena = GetComponent<BoxCollider2D>();
     }
 

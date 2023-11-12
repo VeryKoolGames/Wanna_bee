@@ -39,7 +39,6 @@ public class enemyManager : MonoBehaviour
             {
                 Destroy(x.Value.gameObject);
             }
-            // Enemies.Remove(x.Key);
         }
     }
 }
