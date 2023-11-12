@@ -21,13 +21,16 @@ public class PlayerActions : MonoBehaviour
     private GameObject currentFlower;
 
     [SerializeField] private int maxBee = 50;
+    [SerializeField] private int ressourceToEnd = 50;
     [SerializeField] private GameObject beeObject;
     [SerializeField] private List <GameObject> listOfBeeObject;
     [SerializeField] private GameObject flowerDObject;
     [SerializeField] private GameObject flowerTObject;
     [SerializeField] private HoneySpawnMonitor spawnMonitor;
+    [SerializeField] private EndingManager _endingManager;
     public List<KeyValuePair> MyList = new List<KeyValuePair>();
     private Dictionary<int, Animator> Animations = new Dictionary<int, Animator>();
+    private HoneyState _currentFlowerState;
 
     private BoxCollider2D beeSpawnArena;
     private HoneyState currentFlowerState;
@@ -60,12 +63,11 @@ public class PlayerActions : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        Debug.Log(other.tag);
         if (other.CompareTag("Flower"))
         {
             _canInteractWithFlowers = false;
+            currentFlower.GetComponent<FlowerGAction>().HideBeeUI();
             currentFlower = null;
-            other.gameObject.GetComponent<FlowerGAction>().HideBeeUI();
         }
         else if (other.CompareTag("FlowerSpawn"))
         {
@@ -74,6 +76,7 @@ public class PlayerActions : MonoBehaviour
         else if (other.CompareTag("End"))
         {
             _canInteractWithEnd = false;
+            _endingManager.baseTree();
         }
     }
     
@@ -98,6 +101,7 @@ public class PlayerActions : MonoBehaviour
         else if (col.CompareTag("End"))
         {
             _canInteractWithEnd = true;
+            _endingManager.highlightTree();
         }
     }
 
@@ -169,15 +173,22 @@ public class PlayerActions : MonoBehaviour
     
     private void FeedFlowers()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && _canInteractWithFlowers && beeCounter > 0)
+        if (Input.GetKeyDown(KeyCode.Space) && _canInteractWithFlowers && !_canInteractWithEnd)
         {
-            HoneyState res = currentFlower.GetComponent<FlowerGAction>().UpdateBeeNumber();
-            if (res == HoneyState.Added)
+            FlowerGAction flowerScript = currentFlower.GetComponent<FlowerGAction>();
+            if (beeCounter > 0 && !flowerScript.isReadyToHarvest)
             {
+                flowerScript.UpdateBeeNumber();
                 beeCounter -= 1;
                 _counterHandler.updateBeeCounter(beeCounter);
                 Destroy(listOfBeeObject[0]);
                 listOfBeeObject.RemoveAt(0);
+            }
+            else if (flowerScript.isReadyToHarvest)
+            {
+                flowerScript.UpdateBeeNumber();
+                _setRessources(ressourceCounter + 20);
+                _counterHandler.updateHoneyCounter(ressourceCounter);
             }
         }
     }
@@ -186,8 +197,8 @@ public class PlayerActions : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space) && _canInteractWithFlowers && currentFlower.GetComponent<FlowerGAction>().isReadyToHarvest)
         {
-            HoneyState res = currentFlower.GetComponent<FlowerGAction>().UpdateBeeNumber();
-            if (res == HoneyState.Ready)
+            _currentFlowerState = currentFlower.GetComponent<FlowerGAction>().UpdateBeeNumber();
+            if (_currentFlowerState == HoneyState.Ready)
             {
                 _setRessources(ressourceCounter + 20);
                 _counterHandler.updateHoneyCounter(ressourceCounter);
@@ -197,20 +208,19 @@ public class PlayerActions : MonoBehaviour
 
     private void CompleteGame()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && _canInteractWithEnd && ressourceCounter >= 200)
+        if (Input.GetKeyDown(KeyCode.Space) && _canInteractWithEnd && ressourceCounter >= ressourceToEnd)
         {
-            Debug.Log("Gg you win");
-            SceneManager.LoadScene("0");
+            SceneManager.LoadScene(3);
         }
     }
-
+    
     // Update is called once per frame
     void Update()
     {
         SpawnBee();
         SpawnFlower();
         FeedFlowers();
-        HarvestFlowers();
+        // HarvestFlowers();
         CompleteGame();
     }
 }

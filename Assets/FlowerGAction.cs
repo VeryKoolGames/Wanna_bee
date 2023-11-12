@@ -14,8 +14,11 @@ public class FlowerGAction : MonoBehaviour
     [SerializeField] private GameObject canvasBeeUI;
     [SerializeField] private GameObject canvasHarvestUI;
     [SerializeField] private Sprite highlightedSprite;
-    private Sprite normalSprite;
-    private SpriteRenderer spriteRendered;
+    [SerializeField] private Sprite normalSprite;
+    [SerializeField] private SpriteRenderer spriteRendered;
+    [SerializeField] private Animator beePopupAnimator;
+    [SerializeField] private Animator flowerMoveAnimator;
+    [SerializeField] private Animator rdyPopupAnimator;
 
     private void UpdateBeeUI()
     {
@@ -28,12 +31,23 @@ public class FlowerGAction : MonoBehaviour
         {
             canvasBeeUI.SetActive(true);
         }
+        beePopupAnimator.SetBool("shouldClose", false);
+        beePopupAnimator.SetBool("shouldOpen", true);
         spriteRendered.sprite = highlightedSprite;
         spriteRendered.sortingOrder = 5;
     }
     
     public void HideBeeUI()
     {
+        StartCoroutine(LaunchCloseAnim());
+    }
+    
+    private IEnumerator LaunchCloseAnim()
+    {
+        canvasBeeUI.SetActive(true);
+        beePopupAnimator.SetBool("shouldOpen", false);
+        beePopupAnimator.SetBool("shouldClose", true);
+        yield return new WaitForSeconds(.4f);
         if (!isReadyToHarvest)
         {
             canvasBeeUI.SetActive(false);
@@ -43,8 +57,6 @@ public class FlowerGAction : MonoBehaviour
 
     private void Start()
     {
-        spriteRendered = gameObject.GetComponent<SpriteRenderer>();
-        normalSprite = gameObject.GetComponent<SpriteRenderer>().sprite;
         _startLaunchGrowth();
     }
 
@@ -72,6 +84,10 @@ public class FlowerGAction : MonoBehaviour
         isReadyToHarvest = false;
         canvasBeeUI.SetActive(true);
         canvasHarvestUI.SetActive(false);
+        beePopupAnimator.SetBool("shouldClose", false);
+        beePopupAnimator.SetBool("shouldOpen", true);
+        flowerMoveAnimator.SetBool("isReady", false);
+        // rdyPopupAnimator.SetTrigger("isDone");
         StartCoroutine(LaunchGrowthTimer());
     }
 
@@ -85,6 +101,8 @@ public class FlowerGAction : MonoBehaviour
                 isReadyToHarvest = true;
                 canvasBeeUI.SetActive(false);
                 canvasHarvestUI.SetActive(true);
+                flowerMoveAnimator.SetBool("isReady", true);
+                break;
             }
             yield return new WaitForSeconds(1f);
         }
