@@ -45,7 +45,12 @@ public class PlayerMovement : MonoBehaviour
     {
         if (canMove)
         {
-            rb.velocity = movementDirection * (moveSpeed - playerScript.getBeeCounter() / 3);
+            float newSpeed = moveSpeed - playerScript.getBeeCounter() / 10;
+            if (newSpeed <= 0.5)
+            {
+                newSpeed = 0.5f;
+            }
+            rb.velocity = movementDirection * (newSpeed);
         }
     }
 }

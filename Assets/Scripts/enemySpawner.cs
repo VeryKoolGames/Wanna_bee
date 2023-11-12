@@ -26,7 +26,7 @@ public class enemySpawner : MonoBehaviour
         while (canSpawn)
         {
             int y = Random.Range(0, spawnZones.Count);
-            BoxCollider2D spawnZone = spawnZones[0];
+            BoxCollider2D spawnZone = spawnZones[y];
             Vector2 pos = GetRandomPointInCollider(spawnZone);
             Instantiate(enemyPrefab, pos, Quaternion.identity);
             yield return new WaitForSeconds(spawningRate);

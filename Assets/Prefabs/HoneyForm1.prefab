@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 215367937319821016}
   - component: {fileID: 4266978193412869422}
   - component: {fileID: 8884167898507270808}
+  - component: {fileID: -6909136188409619935}
   m_Layer: 0
   m_Name: HoneyForm1
   m_TagString: Honey
@@ -152,3 +153,17 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &-6909136188409619935
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4571398559349295902}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 336e03dcfe51e5c43bbf8984df0a5977, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 2
+  player: {fileID: 1039687757229942097, guid: a502e6dc75554c54b99235035819dc00, type: 3}

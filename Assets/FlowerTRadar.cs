@@ -29,6 +29,7 @@ public class FlowerTRadar : MonoBehaviour
             if (mAnimator != null)
             {
                 mAnimator.SetTrigger("RadarOn");
+                mAnimator.SetTrigger("RadarOff");
             }
         }
     }
