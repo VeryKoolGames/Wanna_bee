@@ -30,4 +30,16 @@ public class enemyManager : MonoBehaviour
             x.Value.findTarget();
         }
     }
+    
+    public void KillAllEnemies()
+    {
+        foreach (var x in Enemies)
+        {
+            if (x.Value.gameObject)
+            {
+                Destroy(x.Value.gameObject);
+            }
+            // Enemies.Remove(x.Key);
+        }
+    }
 }

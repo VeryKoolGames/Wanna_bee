@@ -12,6 +12,7 @@ TagManager:
   - FT
   - PlayerLerp
   - End
+  - MapLimit
   layers:
   - Default
   - TransparentFX

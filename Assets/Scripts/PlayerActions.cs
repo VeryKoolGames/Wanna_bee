@@ -28,6 +28,8 @@ public class PlayerActions : MonoBehaviour
     [SerializeField] private GameObject flowerTObject;
     [SerializeField] private HoneySpawnMonitor spawnMonitor;
     [SerializeField] private EndingManager _endingManager;
+    [SerializeField] private enemySpawner enemySpawner;
+    [SerializeField] private Animator _endFade;
     public List<KeyValuePair> MyList = new List<KeyValuePair>();
     private Dictionary<int, Animator> Animations = new Dictionary<int, Animator>();
     private HoneyState _currentFlowerState;
@@ -56,8 +58,8 @@ public class PlayerActions : MonoBehaviour
 
     private void Start()
     {
-        _counterHandler.updateHoneyCounter(ressourceCounter);
-        _counterHandler.updateBeeCounter(beeCounter);
+        // _counterHandler.updateHoneyCounter(ressourceCounter);
+        // _counterHandler.updateBeeCounter(beeCounter);
         beeSpawnArena = GetComponent<BoxCollider2D>();
     }
 
@@ -164,10 +166,13 @@ public class PlayerActions : MonoBehaviour
 
     public void removeBees()
     {
-        int max = 5 > listOfBeeObject.Count ? 5 : listOfBeeObject.Count;
+        int max = 5 > listOfBeeObject.Count ? listOfBeeObject.Count : 5;
         for (int i = 0; i < max; i++)
         {
+            Destroy(listOfBeeObject[0]);
             listOfBeeObject.RemoveAt(0);
+            beeCounter -= 1;
+            _counterHandler.updateBeeCounter(beeCounter);
         }
     }
     
@@ -193,25 +198,21 @@ public class PlayerActions : MonoBehaviour
         }
     }
 
-    private void HarvestFlowers()
-    {
-        if (Input.GetKeyDown(KeyCode.Space) && _canInteractWithFlowers && currentFlower.GetComponent<FlowerGAction>().isReadyToHarvest)
-        {
-            _currentFlowerState = currentFlower.GetComponent<FlowerGAction>().UpdateBeeNumber();
-            if (_currentFlowerState == HoneyState.Ready)
-            {
-                _setRessources(ressourceCounter + 20);
-                _counterHandler.updateHoneyCounter(ressourceCounter);
-            }
-        }
-    }
-
     private void CompleteGame()
     {
         if (Input.GetKeyDown(KeyCode.Space) && _canInteractWithEnd && ressourceCounter >= ressourceToEnd)
         {
-            SceneManager.LoadScene(3);
+            StartCoroutine(launchEndGame());
         }
+    }
+    
+    public IEnumerator launchEndGame()
+    {
+        _endFade.SetTrigger("start");
+        enemySpawner.StopEnemiesSpawn();
+        enemyManager.Instance.KillAllEnemies();
+        yield return new WaitForSeconds(1f);
+        SceneManager.LoadScene(2);
     }
     
     // Update is called once per frame
@@ -220,7 +221,6 @@ public class PlayerActions : MonoBehaviour
         SpawnBee();
         SpawnFlower();
         FeedFlowers();
-        // HarvestFlowers();
         CompleteGame();
     }
 }

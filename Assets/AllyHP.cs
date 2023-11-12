@@ -8,6 +8,7 @@ public class AllyHP : MonoBehaviour
 {
     [SerializeField] private float hp = 20;
     [SerializeField] private enemySpawner _enemySpawner;
+    [SerializeField] private GameObject gameOverCanvas;
 
     private void Start()
     {
@@ -30,8 +31,8 @@ public class AllyHP : MonoBehaviour
             PlayerActions playerActions = gameObject.GetComponent<PlayerActions>();
             if (playerActions.beeCounter > 0)
             {
-                createShieldEffect();
                 playerActions.removeBees();
+                return;
             }
         }
         hp -= 10;
@@ -43,13 +44,9 @@ public class AllyHP : MonoBehaviour
             if (tag == "Player")
             {
                 _enemySpawner.StopEnemiesSpawn();
-                SceneManager.LoadScene(2);
+                gameOverCanvas.SetActive(true);
             }
         }
     }
 
-    private void createShieldEffect()
-    {
-        throw new NotImplementedException();
-    }
 }
