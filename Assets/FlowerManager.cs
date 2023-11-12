@@ -30,8 +30,13 @@ public class FlowerManager : MonoBehaviour
 
     public GameObject getRandomAlly()
     {
-        System.Random rand = new System.Random();
-        GameObject test = Allies.ElementAt(rand.Next(0, Allies.Count)).Value.gameObject;
-        return test;
+        if (Allies.Count > 0)
+        {
+            System.Random rand = new System.Random();
+            GameObject test = Allies.ElementAt(rand.Next(0, Allies.Count)).Value.gameObject;
+            return test;
+        }
+
+        return null;
     }
 }

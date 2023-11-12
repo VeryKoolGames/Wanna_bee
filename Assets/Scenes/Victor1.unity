@@ -19830,73 +19830,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &846810738
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 846810739}
-  - component: {fileID: 846810740}
-  m_Layer: 0
-  m_Name: GameObject
-  m_TagString: PlayerLerp
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &846810739
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 846810738}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.32, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1602582972389454332}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!58 &846810740
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 846810738}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 1.3556075, y: 0}
-  serializedVersion: 2
-  m_Radius: 1.8556082
 --- !u!1 &849537610
 GameObject:
   m_ObjectHideFlags: 0
@@ -30643,7 +30576,7 @@ PrefabInstance:
       objectReference: {fileID: 775763350}
     - target: {fileID: 8758111055793416078, guid: e78f341fabe70834ab9a231d74a4c29d, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8758111055793416078, guid: e78f341fabe70834ab9a231d74a4c29d, type: 3}
       propertyPath: spawningRate
@@ -30989,7 +30922,7 @@ GameObject:
   - component: {fileID: 1978360827}
   m_Layer: 0
   m_Name: ElixirV2_1
-  m_TagString: Untagged
+  m_TagString: Honey
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -31094,6 +31027,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 336e03dcfe51e5c43bbf8984df0a5977, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 3
   playerPos: {fileID: 1602582972389454332}
 --- !u!61 &1978360828
 BoxCollider2D:
@@ -40979,7 +40913,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1039687757229942097, guid: a502e6dc75554c54b99235035819dc00, type: 3}
       propertyPath: m_TagString
-      value: Untagged
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 5575789824954977331, guid: a502e6dc75554c54b99235035819dc00, type: 3}
       propertyPath: m_LocalPosition.x
@@ -41022,57 +40956,20 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6470894759614197537, guid: a502e6dc75554c54b99235035819dc00, type: 3}
-      propertyPath: buttonBee
-      value: 
-      objectReference: {fileID: 1545534112}
-    - target: {fileID: 6470894759614197537, guid: a502e6dc75554c54b99235035819dc00, type: 3}
-      propertyPath: buttonFlowerD
-      value: 
-      objectReference: {fileID: 1234061936}
-    - target: {fileID: 6470894759614197537, guid: a502e6dc75554c54b99235035819dc00, type: 3}
-      propertyPath: buttonFlowerG
-      value: 
-      objectReference: {fileID: 1945217059}
-    - target: {fileID: 6470894759614197537, guid: a502e6dc75554c54b99235035819dc00, type: 3}
-      propertyPath: ressourceCounter
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6470894759614197537, guid: a502e6dc75554c54b99235035819dc00, type: 3}
-      propertyPath: MyList.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 6470894759614197537, guid: a502e6dc75554c54b99235035819dc00, type: 3}
-      propertyPath: MyList.Array.data[0].key
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6470894759614197537, guid: a502e6dc75554c54b99235035819dc00, type: 3}
       propertyPath: MyList.Array.data[0].val
       value: 
       objectReference: {fileID: 1545534112}
-    - target: {fileID: 6470894759614197537, guid: a502e6dc75554c54b99235035819dc00, type: 3}
-      propertyPath: MyList.Array.data[1].key
-      value: 10
-      objectReference: {fileID: 0}
     - target: {fileID: 6470894759614197537, guid: a502e6dc75554c54b99235035819dc00, type: 3}
       propertyPath: MyList.Array.data[1].val
       value: 
       objectReference: {fileID: 1945217059}
     - target: {fileID: 6470894759614197537, guid: a502e6dc75554c54b99235035819dc00, type: 3}
-      propertyPath: MyList.Array.data[2].key
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 6470894759614197537, guid: a502e6dc75554c54b99235035819dc00, type: 3}
       propertyPath: MyList.Array.data[2].val
       value: 
       objectReference: {fileID: 1234061936}
     m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: 5886887499233850137, guid: a502e6dc75554c54b99235035819dc00, type: 3}
-    - {fileID: 8036175339086092647, guid: a502e6dc75554c54b99235035819dc00, type: 3}
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 5575789824954977331, guid: a502e6dc75554c54b99235035819dc00, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 846810739}
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a502e6dc75554c54b99235035819dc00, type: 3}
 --- !u!4 &1602582972389454332 stripped

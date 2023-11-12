@@ -64,7 +64,6 @@ public class PlayerActions : MonoBehaviour
         if (other.CompareTag("Flower"))
         {
             _canInteractWithFlowers = false;
-            Debug.Log("Here is false");
             currentFlower = null;
             other.gameObject.GetComponent<FlowerGAction>().HideBeeUI();
         }
@@ -123,7 +122,7 @@ public class PlayerActions : MonoBehaviour
             {
                 x.Value.SetBool("isTrigger", true);
             }
-            else if (newValue <= x.Key && ressourceCounter >= x.Key)
+            else if (newValue < x.Key && ressourceCounter >= x.Key)
             {
                 x.Value.SetBool("isTrigger", false);
             }

@@ -6,7 +6,7 @@ using UnityEngine;
 public class EnemyController : MonoBehaviour
 {
     private GameObject _target;
-    [SerializeField] private float speed = 3f;
+    [SerializeField] private float speed = 1f;
     void Start()
     {
         enemyManager.Register(gameObject.GetInstanceID(), this);

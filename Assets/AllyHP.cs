@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 public class AllyHP : MonoBehaviour
 {
     [SerializeField] private float hp = 20;
+    [SerializeField] private enemySpawner _enemySpawner;
 
     private void Start()
     {
@@ -41,6 +42,7 @@ public class AllyHP : MonoBehaviour
             Destroy(gameObject);
             if (tag == "Player")
             {
+                _enemySpawner.StopEnemiesSpawn();
                 SceneManager.LoadScene(2);
             }
         }
