@@ -8,13 +8,8 @@ public class PepinoController : MonoBehaviour
     private GameObject _target;
     private GameObject _audioManager;
 
-    private GameObject test;
     private void Start()
     {
-        // test = GameObject.FindWithTag("Respawn");
-        // _audioManager = GameObject.FindWithTag("AudioManager");
-        // _audioManager.SetActive(true);
-        // _audioManager.GetComponent<AudioManager>().playSound("ButtonClick");
     }
 
     // Update is called once per frame
@@ -22,7 +17,7 @@ public class PepinoController : MonoBehaviour
     {
         if (!_target) // when enemy hit an ally before pepino touches it
         {
-            Destroy(transform.parent.gameObject);
+            Destroy(transform.gameObject);
             return;
         }
         transform.position =
@@ -35,7 +30,7 @@ public class PepinoController : MonoBehaviour
         {
             AudioManager.Instance.playSound("HitHurt2");
             Destroy(col.transform.gameObject);
-            // Debug.Log("P: Enemy Down");
+            Debug.Log("P: Enemy Down");
         }
     }
 

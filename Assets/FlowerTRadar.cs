@@ -24,13 +24,11 @@ public class FlowerTRadar : MonoBehaviour
         if (col.CompareTag("Enemy"))
         {
             AudioManager.Instance.playSound("FT");
-            // Debug.Log("T: Pepino goo !!!");
             GameObject ret = Instantiate(pepino, transform.position, Quaternion.identity, transform);
             ret.GetComponent<PepinoController>().setTarget(col.gameObject); // set target ok
             if (mAnimator != null)
             {
                 mAnimator.SetTrigger("RadarOn");
-                // mAnimator.SetTrigger("RadarOff");
             }
         }
     }
