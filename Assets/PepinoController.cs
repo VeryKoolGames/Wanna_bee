@@ -10,7 +10,7 @@ public class PepinoController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log("Pepino Target is : " + getTargetTag()); // get target ok
+        // Debug.Log("Pepino Target is : " + getTargetTag()); // get target ok
     }
 
     // Update is called once per frame
@@ -27,17 +27,17 @@ public class PepinoController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.CompareTag("Enemy"))
+        if (col.CompareTag("Enemy")) // only works if rigidbody on enemy !
         {
             Destroy(col.transform.gameObject);
-            Debug.Log("P: Enemy Down");
+            // Debug.Log("P: Enemy Down");
         }
     }
 
     public void setTarget(GameObject target)
     {
         _target = target;
-        Debug.Log("I got set target pepino : " + _target.tag); // this works, but does not seem to save target
+        // Debug.Log("I got set target pepino : " + _target.tag); // this works, but does not seem to save target
     }
 
     public string getTargetTag()
