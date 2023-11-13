@@ -81,6 +81,7 @@ public class PlayerActions : MonoBehaviour
         }
         else if (other.CompareTag("End"))
         {
+            _canPlantFlowers = true;
             _canInteractWithEnd = false;
             _endingManager.baseTree();
         }
@@ -108,6 +109,7 @@ public class PlayerActions : MonoBehaviour
         }
         else if (col.CompareTag("End"))
         {
+            _canPlantFlowers = false;
             _canInteractWithEnd = true;
             _endingManager.highlightTree();
         }
@@ -130,11 +132,11 @@ public class PlayerActions : MonoBehaviour
     {
         foreach (var x in Animations)
         {
-            if (newValue >= x.Key && ressourceCounter < x.Key)
+            if (newValue >= x.Key)
             {
                 x.Value.SetBool("isTrigger", true);
             }
-            else if (newValue < x.Key && ressourceCounter >= x.Key)
+            else if (newValue < x.Key)
             {
                 x.Value.SetBool("isTrigger", false);
             }
@@ -144,15 +146,15 @@ public class PlayerActions : MonoBehaviour
 
     private void SpawnFlower()
     {
-        if (!(ressourceCounter >= 20) || !_canPlantFlowers) return;
-        if (Input.GetKeyDown("1"))
+        if (!_canPlantFlowers) return;
+        if (Input.GetKeyDown("1") && ressourceCounter >= 10)
         {
             AudioManager.Instance.playSound("ButtonClick");
             Instantiate(flowerDObject, GetRandomPointInCollider(beeSpawnArena), Quaternion.identity);
-            _setRessources(ressourceCounter - 20);
+            _setRessources(ressourceCounter - 10);
             _counterHandler.updateHoneyCounter(ressourceCounter);
         }
-        else if (Input.GetKeyDown("2"))
+        else if (Input.GetKeyDown("2") && ressourceCounter >= 20)
         {
             AudioManager.Instance.playSound("ButtonClick");
             Instantiate(flowerTObject, GetRandomPointInCollider(beeSpawnArena), Quaternion.identity);
@@ -187,7 +189,7 @@ public class PlayerActions : MonoBehaviour
     
     private void FeedFlowers()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && _canInteractWithFlowers && !_canInteractWithEnd)
+        if (Input.GetKeyDown(KeyCode.Space) && _canInteractWithFlowers)
         {
             AudioManager.Instance.playSound("ButtonClick");
             FlowerGAction flowerScript = currentFlower.GetComponent<FlowerGAction>();

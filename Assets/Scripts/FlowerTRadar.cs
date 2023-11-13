@@ -21,11 +21,11 @@ public class FlowerTRadar : MonoBehaviour
     {
         if (col.CompareTag("Enemy") && canShoot)
         {
+            mAnimator.SetTrigger("shoot");
             AudioManager.Instance.playSound("FT");
+            StartCoroutine(blockShooting());
             GameObject ret = Instantiate(pepino, transform.position, Quaternion.identity, transform);
             ret.GetComponent<PepinoController>().setTarget(col.gameObject); // set target ok
-            StartCoroutine(blockShooting());
-            mAnimator.SetTrigger("shoot");
         }
     }
 }

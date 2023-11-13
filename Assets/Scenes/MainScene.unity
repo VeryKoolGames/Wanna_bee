@@ -479,7 +479,7 @@ GameObject:
   - component: {fileID: 337223044}
   - component: {fileID: 337223043}
   - component: {fileID: 337223042}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: PhysicCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -666,11 +666,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 677357029267953526, guid: a41ae78ead1cd21459dbbdc7aaa8792d, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0.00012207
+      value: -0.000015259
       objectReference: {fileID: 0}
     - target: {fileID: 677357029267953526, guid: a41ae78ead1cd21459dbbdc7aaa8792d, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 214
+      value: 104
       objectReference: {fileID: 0}
     - target: {fileID: 677357029267953526, guid: a41ae78ead1cd21459dbbdc7aaa8792d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -739,7 +739,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 10, y: 397.83}
+  m_AnchoredPosition: {x: 10, y: 278}
   m_SizeDelta: {x: 841.8458, y: 210.4615}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &474373121
@@ -771,8 +771,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4281874569
-  m_fontColor: {r: 0.5377358, g: 0.22067462, b: 0.22067462, a: 1}
+    rgba: 4281545868
+  m_fontColor: {r: 0.5471698, g: 0.2022188, b: 0.19873619, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -825,7 +825,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 0, y: 0, z: 0, w: -19.615814}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -6459,7 +6459,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 677357029267953526, guid: a41ae78ead1cd21459dbbdc7aaa8792d, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.0000076293945
+      value: -78.603004
       objectReference: {fileID: 0}
     - target: {fileID: 677357029267953526, guid: a41ae78ead1cd21459dbbdc7aaa8792d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -6919,7 +6919,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 677357029267953526, guid: a41ae78ead1cd21459dbbdc7aaa8792d, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -232
+      value: -250
       objectReference: {fileID: 0}
     - target: {fileID: 677357029267953526, guid: a41ae78ead1cd21459dbbdc7aaa8792d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -8431,7 +8431,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.29803923}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.6666667}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -13667,6 +13667,10 @@ PrefabInstance:
       value: Perso_v1
       objectReference: {fileID: 0}
     - target: {fileID: 1039687757229942097, guid: a502e6dc75554c54b99235035819dc00, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1039687757229942097, guid: a502e6dc75554c54b99235035819dc00, type: 3}
       propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
@@ -13686,6 +13690,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 67596801779ac410a951d288ef713a5d, type: 3}
+    - target: {fileID: 4328000336465132953, guid: a502e6dc75554c54b99235035819dc00, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 4328000336465132953, guid: a502e6dc75554c54b99235035819dc00, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -13786,6 +13794,10 @@ PrefabInstance:
       propertyPath: MyList.Array.data[1].val
       value: 
       objectReference: {fileID: 1945217059}
+    - target: {fileID: 6470894759614197537, guid: a502e6dc75554c54b99235035819dc00, type: 3}
+      propertyPath: MyList.Array.data[2].key
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 6470894759614197537, guid: a502e6dc75554c54b99235035819dc00, type: 3}
       propertyPath: MyList.Array.data[2].val
       value: 

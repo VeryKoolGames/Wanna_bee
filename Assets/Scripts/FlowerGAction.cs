@@ -16,9 +16,10 @@ public class FlowerGAction : MonoBehaviour
     [SerializeField] private Sprite highlightedSprite;
     [SerializeField] private Sprite normalSprite;
     [SerializeField] private SpriteRenderer spriteRendered;
-    // [SerializeField] private Animator beePopupAnimator;
-    // [SerializeField] private Animator flowerMoveAnimator;
-    // [SerializeField] private Animator rdyPopupAnimator;
+    [SerializeField] private Animator beePopupAnimator;
+    [SerializeField] private Animator flowerMoveAnimator;
+    [SerializeField] private Animator rdyPopupAnimator;
+    [SerializeField] private ParticleSystem test;
 
     private void UpdateBeeUI()
     {
@@ -27,43 +28,19 @@ public class FlowerGAction : MonoBehaviour
 
     public void ShowBeeUI()
     {
-        if (!isReadyToHarvest)
-        {
-            canvasBeeUI.SetActive(true);
-        }
-        // beePopupAnimator.SetBool("shouldClose", false);
-        // beePopupAnimator.SetBool("shouldOpen", true);
+        beePopupAnimator.SetBool("shouldClose", false);
+        beePopupAnimator.SetBool("shouldOpen", true);
         spriteRendered.sprite = highlightedSprite;
         spriteRendered.sortingOrder = 5;
     }
     
     public void HideBeeUI()
     {
-        // canvasBeeUI.SetActive(true);
-        // beePopupAnimator.SetBool("shouldOpen", false);
-        // beePopupAnimator.SetBool("shouldClose", true);
-        // yield return new WaitForSeconds(.4f);
-        if (!isReadyToHarvest)
-        {
-            canvasBeeUI.SetActive(false);
-        }
+        beePopupAnimator.SetBool("shouldOpen", false);
+        beePopupAnimator.SetBool("shouldClose", true);
         spriteRendered.sprite = normalSprite;
         spriteRendered.sortingOrder = 5;
-        // StartCoroutine(LaunchCloseAnim());
     }
-    
-    // private IEnumerator LaunchCloseAnim()
-    // {
-    //     canvasBeeUI.SetActive(true);
-    //     // beePopupAnimator.SetBool("shouldOpen", false);
-    //     // beePopupAnimator.SetBool("shouldClose", true);
-    //     yield return new WaitForSeconds(.4f);
-    //     if (!isReadyToHarvest)
-    //     {
-    //         canvasBeeUI.SetActive(false);
-    //     }
-    //     spriteRendered.sprite = normalSprite;
-    // }
 
     private void Start()
     {
@@ -75,7 +52,10 @@ public class FlowerGAction : MonoBehaviour
         HoneyState res = HoneyState.Full;
         if (isReadyToHarvest)
         {
+            test.Play();
             res = HoneyState.Ready;
+            canvasBeeUI.SetActive(true);
+            rdyPopupAnimator.SetBool("isOpen", false);
             _startLaunchGrowth();
         }
         else if (beeNumber < 5)
@@ -92,12 +72,9 @@ public class FlowerGAction : MonoBehaviour
     {
         currentState = 0;
         isReadyToHarvest = false;
-        canvasBeeUI.SetActive(true);
-        canvasHarvestUI.SetActive(false);
-        // beePopupAnimator.SetBool("shouldClose", false);
-        // beePopupAnimator.SetBool("shouldOpen", true);
-        // flowerMoveAnimator.SetBool("isReady", false);
-        // rdyPopupAnimator.SetTrigger("isDone");
+        beePopupAnimator.SetBool("shouldClose", false);
+        beePopupAnimator.SetBool("shouldOpen", true);
+        flowerMoveAnimator.SetBool("isReady", false);
         StartCoroutine(LaunchGrowthTimer());
     }
 
@@ -110,8 +87,8 @@ public class FlowerGAction : MonoBehaviour
             {
                 isReadyToHarvest = true;
                 canvasBeeUI.SetActive(false);
-                canvasHarvestUI.SetActive(true);
-                // flowerMoveAnimator.SetBool("isReady", true);
+                rdyPopupAnimator.SetBool("isOpen", true);
+                flowerMoveAnimator.SetBool("isReady", true);
                 break;
             }
             yield return new WaitForSeconds(1f);

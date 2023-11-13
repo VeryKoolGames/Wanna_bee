@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6651011974186637761}
   - component: {fileID: 8303113088437076754}
   - component: {fileID: 613797357219035734}
-  - component: {fileID: -2000759726348039172}
+  - component: {fileID: 85839549535846198}
   m_Layer: 0
   m_Name: FlowerT1
   m_TagString: FT
@@ -151,7 +151,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!95 &-2000759726348039172
+--- !u!95 &85839549535846198
 Animator:
   serializedVersion: 5
   m_ObjectHideFlags: 0
@@ -161,7 +161,7 @@ Animator:
   m_GameObject: {fileID: 7600789006712951}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 5061bd1f7968a436fb7c7ee1263fea16, type: 2}
+  m_Controller: {fileID: 9100000, guid: 2526d2516be9ee64f9fcc221b5d7252c, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -359,5 +359,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pepino: {fileID: 7798939141945247613, guid: 159f535ffa1d14e84af8b1718485d61e, type: 3}
-  coolDown: 0.5
-  mAnimator: {fileID: -2000759726348039172}
+  coolDown: 2
+  mAnimator: {fileID: 85839549535846198}
