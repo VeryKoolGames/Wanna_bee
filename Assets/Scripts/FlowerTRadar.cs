@@ -6,31 +6,26 @@ using UnityEngine;
 public class FlowerTRadar : MonoBehaviour
 {
     [SerializeField] private GameObject pepino;
-    private Animator mAnimator;
+    [SerializeField] private float coolDown = 4f;
+    [SerializeField] private Animator mAnimator;
+    private bool canShoot = true;
     
-    // Start is called before the first frame update
-    void Start()
+    IEnumerator blockShooting()
     {
-        mAnimator = GetComponentInParent<Animator>(); // for detect animation
+        canShoot = false;
+        yield return new WaitForSeconds(coolDown);
+        canShoot = true;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-    }
-    
     private void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.CompareTag("Enemy"))
+        if (col.CompareTag("Enemy") && canShoot)
         {
             AudioManager.Instance.playSound("FT");
             GameObject ret = Instantiate(pepino, transform.position, Quaternion.identity, transform);
             ret.GetComponent<PepinoController>().setTarget(col.gameObject); // set target ok
-            if (mAnimator != null)
-            {
-                mAnimator.SetTrigger("RadarOn");
-                mAnimator.SetTrigger("RadarOff");
-            }
+            StartCoroutine(blockShooting());
+            mAnimator.SetTrigger("shoot");
         }
     }
 }

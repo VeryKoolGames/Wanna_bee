@@ -1,12 +1,14 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Security.Cryptography;
 using DefaultNamespace;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering.UI;
 using UnityEngine.SceneManagement;
+using Debug = UnityEngine.Debug;
 using Random = UnityEngine.Random;
 
 [Serializable] public class KeyValuePair {
@@ -26,10 +28,12 @@ public class PlayerActions : MonoBehaviour
     [SerializeField] private List <GameObject> listOfBeeObject;
     [SerializeField] private GameObject flowerDObject;
     [SerializeField] private GameObject flowerTObject;
+    [SerializeField] private GameObject playerCollider;
     [SerializeField] private HoneySpawnMonitor spawnMonitor;
     [SerializeField] private EndingManager _endingManager;
     [SerializeField] private enemySpawner enemySpawner;
     [SerializeField] private Animator _endFade;
+    [SerializeField] private Animator _playerHitAnim;
     public List<KeyValuePair> MyList = new List<KeyValuePair>();
     private Dictionary<int, Animator> Animations = new Dictionary<int, Animator>();
     private HoneyState _currentFlowerState;
@@ -224,9 +228,32 @@ public class PlayerActions : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        godMove();
         SpawnBee();
         SpawnFlower();
         FeedFlowers();
         CompleteGame();
+    }
+
+    private void godMove()
+    {
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+            ressourceCounter += 50;
+            _counterHandler.updateHoneyCounter(ressourceCounter);
+        }
+    }
+
+    private IEnumerator deactivatePlayerCollider()
+    {
+        playerCollider.SetActive(false);
+        yield return new WaitForSeconds(1f);
+        playerCollider.SetActive(true);
+    }
+
+    public void playHitAnim()
+    {
+        _playerHitAnim.SetTrigger("isHit");
+        StartCoroutine(deactivatePlayerCollider());
     }
 }

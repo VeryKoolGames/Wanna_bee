@@ -9,25 +9,25 @@ public class PlayerMovement : MonoBehaviour
 
     private Rigidbody2D rb;
     private PlayerActions playerScript;
-    private bool canMove = true;
+    // private bool canMove = true;
 
     private Vector2 movementDirection;
     // Start is called before the first frame update
-    private void OnTriggerEnter2D(Collider2D col)
-    {
-        if (col.CompareTag("MapLimit"))
-        {
-            canMove = false;
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D other)
-    {
-        if (other.CompareTag("MapLimit"))
-        {
-            canMove = true;
-        }
-    }
+    // private void OnTriggerEnter2D(Collider2D col)
+    // {
+    //     if (col.CompareTag("MapLimit"))
+    //     {
+    //         canMove = false;
+    //     }
+    // }
+    //
+    // private void OnTriggerExit2D(Collider2D other)
+    // {
+    //     if (other.CompareTag("MapLimit"))
+    //     {
+    //         canMove = true;
+    //     }
+    // }
 
     void Start()
     {
@@ -43,14 +43,11 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (canMove)
+        float newSpeed = moveSpeed - playerScript.getBeeCounter() / 7;
+        if (newSpeed <= 0.5)
         {
-            float newSpeed = moveSpeed - playerScript.getBeeCounter() / 10;
-            if (newSpeed <= 0.5)
-            {
-                newSpeed = 0.5f;
-            }
-            rb.velocity = movementDirection * (newSpeed);
+            newSpeed = 0.5f;
         }
+        rb.velocity = movementDirection * (newSpeed);
     }
 }
