@@ -9,6 +9,7 @@ public class FlowerTRadar : MonoBehaviour
     [SerializeField] private float coolDown = 4f;
     [SerializeField] private Animator mAnimator;
     private bool canShoot = true;
+    private GameObject target;
     
     IEnumerator blockShooting()
     {
@@ -17,15 +18,24 @@ public class FlowerTRadar : MonoBehaviour
         canShoot = true;
     }
 
-    private void OnTriggerEnter2D(Collider2D col)
+    private void Update()
     {
-        if (col.CompareTag("Enemy") && canShoot)
+        if (canShoot && target)
         {
             mAnimator.SetTrigger("shoot");
             AudioManager.Instance.playSound("FT");
             StartCoroutine(blockShooting());
             GameObject ret = Instantiate(pepino, transform.position, Quaternion.identity, transform);
-            ret.GetComponent<PepinoController>().setTarget(col.gameObject); // set target ok
+            ret.GetComponent<PepinoController>().setTarget(target); // set target ok
+            target = null;
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.CompareTag("Enemy"))
+        {
+            target = col.gameObject;
         }
     }
 }

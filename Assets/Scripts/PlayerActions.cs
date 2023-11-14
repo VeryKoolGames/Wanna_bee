@@ -29,10 +29,8 @@ public class PlayerActions : MonoBehaviour
     [SerializeField] private GameObject flowerDObject;
     [SerializeField] private GameObject flowerTObject;
     [SerializeField] private GameObject playerCollider;
-    [SerializeField] private HoneySpawnMonitor spawnMonitor;
     [SerializeField] private EndingManager _endingManager;
-    [SerializeField] private enemySpawner enemySpawner;
-    [SerializeField] private Animator _endFade;
+    [SerializeField] private Animator uiCanvasAnim;
     [SerializeField] private Animator _playerHitAnim;
     public List<KeyValuePair> MyList = new List<KeyValuePair>();
     private Dictionary<int, Animator> Animations = new Dictionary<int, Animator>();
@@ -62,8 +60,8 @@ public class PlayerActions : MonoBehaviour
 
     private void Start()
     {
-        _counterHandler.updateHoneyCounter(ressourceCounter);
-        _counterHandler.updateBeeCounter(beeCounter);
+        _counterHandler.updateHoneyCounter(ressourceCounter, ressourceCounter);
+        _counterHandler.updateBeeCounter(beeCounter, ressourceCounter);
         beeSpawnArena = GetComponent<BoxCollider2D>();
     }
 
@@ -94,7 +92,7 @@ public class PlayerActions : MonoBehaviour
             AudioManager.Instance.playSound("Collectible");
             Debug.Log("HONEYYYY");
             _setRessources(ressourceCounter + 5);
-            _counterHandler.updateHoneyCounter(ressourceCounter);
+            _counterHandler.updateHoneyCounter(ressourceCounter, 5);
             Destroy(col.gameObject);
         }
         else if (col.CompareTag("Flower"))
@@ -152,25 +150,47 @@ public class PlayerActions : MonoBehaviour
             AudioManager.Instance.playSound("ButtonClick");
             Instantiate(flowerDObject, GetRandomPointInCollider(beeSpawnArena), Quaternion.identity);
             _setRessources(ressourceCounter - 10);
-            _counterHandler.updateHoneyCounter(ressourceCounter);
+            _counterHandler.updateHoneyCounter(ressourceCounter, -10);
+        }
+        else if (Input.GetKeyDown("1") && ressourceCounter < 10)
+        {
+            _NotEnoughRessources("notEnoughElixir");
         }
         else if (Input.GetKeyDown("2") && ressourceCounter >= 20)
         {
             AudioManager.Instance.playSound("ButtonClick");
             Instantiate(flowerTObject, GetRandomPointInCollider(beeSpawnArena), Quaternion.identity);
             _setRessources(ressourceCounter - 20);
-            _counterHandler.updateHoneyCounter(ressourceCounter);
+            _counterHandler.updateHoneyCounter(ressourceCounter, -20);
         }
+        else if (Input.GetKeyDown("2") && ressourceCounter < 20)
+        {
+            _NotEnoughRessources("notEnoughElixir");
+        }
+    }
+
+
+    private void _NotEnoughRessources(string trigger)
+    {
+        uiCanvasAnim.SetTrigger(trigger);
+        AudioManager.Instance.playSound("notEnoughRessources");
+        // Should play a song
+        return;
     }
 
     private void SpawnBee()
     {
-        if (!Input.GetKeyDown(KeyCode.E) || !(ressourceCounter >= 5) || beeCounter >= maxBee) return;
+        if (!Input.GetKeyDown(KeyCode.E)|| beeCounter >= maxBee) return;
+        if (ressourceCounter < 5)
+        {
+            _NotEnoughRessources("notEnoughElixir");
+            return;
+        }
         AudioManager.Instance.playSound("BeePop");
         _setRessources(ressourceCounter - 5);
         beeCounter += 1;
-        _counterHandler.updateBeeCounter(beeCounter);
-        _counterHandler.updateHoneyCounter(ressourceCounter);
+        _counterHandler.updateBeeCounter(beeCounter, 1);
+        _counterHandler.updateHoneyCounter(ressourceCounter, -5);
         GameObject res = Instantiate(beeObject, GetRandomPointInCollider(beeSpawnArena), Quaternion.identity, transform);
         listOfBeeObject.Add(res);
     }
@@ -183,13 +203,13 @@ public class PlayerActions : MonoBehaviour
             Destroy(listOfBeeObject[0]);
             listOfBeeObject.RemoveAt(0);
             beeCounter -= 1;
-            _counterHandler.updateBeeCounter(beeCounter);
+            _counterHandler.updateBeeCounter(beeCounter, -1);
         }
     }
     
     private void FeedFlowers()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && _canInteractWithFlowers)
+        if (Input.GetKeyDown(KeyCode.Space) && _canInteractWithFlowers && !_canInteractWithEnd)
         {
             AudioManager.Instance.playSound("ButtonClick");
             FlowerGAction flowerScript = currentFlower.GetComponent<FlowerGAction>();
@@ -197,7 +217,7 @@ public class PlayerActions : MonoBehaviour
             {
                 flowerScript.UpdateBeeNumber();
                 beeCounter -= 1;
-                _counterHandler.updateBeeCounter(beeCounter);
+                _counterHandler.updateBeeCounter(beeCounter, -1);
                 Destroy(listOfBeeObject[0]);
                 listOfBeeObject.RemoveAt(0);
             }
@@ -205,7 +225,11 @@ public class PlayerActions : MonoBehaviour
             {
                 flowerScript.UpdateBeeNumber();
                 _setRessources(ressourceCounter + 20);
-                _counterHandler.updateHoneyCounter(ressourceCounter);
+                _counterHandler.updateHoneyCounter(ressourceCounter, 20);
+            }
+            else if (beeCounter == 0)
+            {
+                _NotEnoughRessources("notEnoughBee");
             }
         }
     }
@@ -216,11 +240,15 @@ public class PlayerActions : MonoBehaviour
         {
             StartCoroutine(launchEndGame());
         }
+        else if (Input.GetKeyDown(KeyCode.Space) && _canInteractWithEnd && ressourceCounter < ressourceToEnd)
+        {
+            _NotEnoughRessources("notEnoughElixir");
+        }
     }
     
     public IEnumerator launchEndGame()
     {
-        _endFade.SetTrigger("start");
+        uiCanvasAnim.SetTrigger("start");
         // enemySpawner.StopEnemiesSpawn();
         // enemyManager.Instance.KillAllEnemies();
         yield return new WaitForSeconds(1f);
@@ -230,19 +258,19 @@ public class PlayerActions : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        godMove();
+        godMode();
         SpawnBee();
         SpawnFlower();
         FeedFlowers();
         CompleteGame();
     }
 
-    private void godMove()
+    private void godMode()
     {
         if (Input.GetKeyDown(KeyCode.X))
         {
             ressourceCounter += 50;
-            _counterHandler.updateHoneyCounter(ressourceCounter);
+            _counterHandler.updateHoneyCounter(ressourceCounter, 50);
         }
     }
 
