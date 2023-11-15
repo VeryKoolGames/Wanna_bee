@@ -13,7 +13,6 @@ public class DespawnDelay : MonoBehaviour
     {
         yield return new WaitForSeconds(despawnDelay);
         Destroy(this.gameObject);
-        
     }
 
     

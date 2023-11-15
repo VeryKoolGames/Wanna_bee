@@ -4880,6 +4880,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1
+  destroyParticles: {fileID: 7773614822623571183, guid: 7436805027f1f4db7ae3b2f547a46e68, type: 3}
 --- !u!61 &1187285869953655023
 BoxCollider2D:
   m_ObjectHideFlags: 0
