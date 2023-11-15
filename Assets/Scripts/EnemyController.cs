@@ -7,6 +7,8 @@ public class EnemyController : MonoBehaviour
 {
     private GameObject _target;
     [SerializeField] private float speed = 1f;
+    [SerializeField] private GameObject destroyParticles;
+    private bool isQuitting;
     void Start()
     {
         enemyManager.Register(gameObject.GetInstanceID(), this);
@@ -34,6 +36,20 @@ public class EnemyController : MonoBehaviour
         else
         {
             findTarget();
+        }
+    }
+    
+    void OnApplicationQuit()
+    {
+        isQuitting = true;
+    }
+
+
+    private void OnDestroy()
+    {
+        if (!isQuitting)
+        {
+            Instantiate(destroyParticles, transform.position, Quaternion.identity);
         }
     }
 }
