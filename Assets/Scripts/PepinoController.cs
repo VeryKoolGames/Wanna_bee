@@ -17,11 +17,16 @@ public class PepinoController : MonoBehaviour
     {
         if (!_target) // when enemy hit an ally before pepino touches it
         {
-            Destroy(transform.gameObject);
-            return;
+            Destroy(gameObject);
         }
-        transform.position =
-            Vector2.MoveTowards(transform.position, _target.transform.position, pepinoSpeed * Time.deltaTime);
+        else
+        {
+            transform.position = Vector2.MoveTowards(
+                transform.position,
+                _target.transform.position,
+                pepinoSpeed * Time.deltaTime
+            );
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D col)

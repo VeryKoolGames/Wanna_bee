@@ -4843,7 +4843,7 @@ GameObject:
   - component: {fileID: 3605575237634544044}
   - component: {fileID: 3216138510363005490}
   - component: {fileID: -5606756143104707967}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Pepino
   m_TagString: Honey
   m_Icon: {fileID: 0}

@@ -10,6 +10,8 @@ public class AllyHP : MonoBehaviour
     [SerializeField] private enemySpawner _enemySpawner;
     [SerializeField] private GameObject gameOverCanvas;
     [SerializeField] private int oldId;
+    [SerializeField] private PlayerActions playerActions;
+    private bool isImmun;
 
     private void Start()
     {
@@ -18,19 +20,29 @@ public class AllyHP : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.CompareTag("Enemy"))
+        if (col.CompareTag("Enemy") && !isImmun)
         {
             AudioManager.Instance.playSound("HitHurt1");
             loseHP();
             Destroy(col.gameObject);
             enemyManager.Instance.RemoveEnemy(col.gameObject.GetInstanceID());
+            isImmun = true;
+            StartCoroutine(immunTimer());
         }
     }
+
+    private IEnumerator immunTimer()
+    {
+        yield return new WaitForSeconds(1f);
+        isImmun = false;
+    }
+    
 
     private void loseHP()
     {
         if (CompareTag("Player"))
         {
+            this.playerActions.playHitAnim();
             PlayerActions playerActions = gameObject.GetComponent<PlayerActions>();
             if (playerActions.beeCounter > 0)
             {
