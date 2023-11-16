@@ -250,7 +250,7 @@ public class PlayerActions : MonoBehaviour
         // enemySpawner.StopEnemiesSpawn();
         // enemyManager.Instance.KillAllEnemies();
         yield return new WaitForSeconds(1f);
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene(3);
     }
     
     // Update is called once per frame
