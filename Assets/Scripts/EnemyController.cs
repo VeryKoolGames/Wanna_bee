@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class EnemyController : MonoBehaviour
 {
@@ -9,6 +10,11 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private float speed = 1f;
     [SerializeField] private GameObject destroyParticles;
     private bool isQuitting;
+
+    public void setIsQuitting(bool value)
+    {
+        isQuitting = value;
+    }
     void Start()
     {
         enemyManager.Register(gameObject.GetInstanceID(), this);
@@ -38,7 +44,7 @@ public class EnemyController : MonoBehaviour
             findTarget();
         }
     }
-    
+
     void OnApplicationQuit()
     {
         isQuitting = true;
@@ -47,7 +53,7 @@ public class EnemyController : MonoBehaviour
 
     private void OnDestroy()
     {
-        if (!isQuitting)
+        if (!isQuitting && Time.timeScale != 0f)
         {
             Instantiate(destroyParticles, transform.position, Quaternion.identity);
         }

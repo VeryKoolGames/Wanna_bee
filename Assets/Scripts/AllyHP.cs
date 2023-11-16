@@ -6,12 +6,13 @@ using UnityEngine.SceneManagement;
 
 public class AllyHP : MonoBehaviour
 {
-    [SerializeField] private float hp = 20;
+    [SerializeField] private int hp = 20;
     [SerializeField] private enemySpawner _enemySpawner;
     [SerializeField] private GameObject gameOverCanvas;
     [SerializeField] private int oldId;
     [SerializeField] private PlayerActions playerActions;
     private bool isImmun;
+    [SerializeField] private HealthBar healthBar;
 
     private void Start()
     {
@@ -27,6 +28,7 @@ public class AllyHP : MonoBehaviour
             Destroy(col.gameObject);
             enemyManager.Instance.RemoveEnemy(col.gameObject.GetInstanceID());
             isImmun = true;
+            healthBar.setHealth(hp);
             StartCoroutine(immunTimer());
         }
     }
@@ -42,15 +44,20 @@ public class AllyHP : MonoBehaviour
     {
         if (CompareTag("Player"))
         {
-            this.playerActions.playHitAnim();
             PlayerActions playerActions = gameObject.GetComponent<PlayerActions>();
-            if (playerActions.beeCounter > 0)
+            if (playerActions.beeCounter >= 5)
             {
                 playerActions.removeBees();
                 return;
             }
+            hp -= 10 - (2 * playerActions.beeCounter);
+            playerActions.removeBees();
+            this.playerActions.playHitAnim();
         }
-        hp -= 10;
+        else
+        {
+            hp -= 10;
+        }
         if (hp <= 0)
         {
             FlowerManager.Remove(gameObject.GetInstanceID());

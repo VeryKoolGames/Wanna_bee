@@ -9,6 +9,7 @@ public class StartMenu : MonoBehaviour
     private GameObject _audioManager;
     private void Start()
     {
+        Time.timeScale = 1f;
         _audioManager = GameObject.FindWithTag("AudioManager");
         // _audioManager.GetComponent<AudioManager>().playSound("ButtonClick");
     }
