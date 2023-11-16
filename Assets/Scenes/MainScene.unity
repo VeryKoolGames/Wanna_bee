@@ -7754,7 +7754,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2479174791262412021, guid: e5301c89514e1484cac4f05179c4b340, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6359899506209163637, guid: e5301c89514e1484cac4f05179c4b340, type: 3}
       propertyPath: m_LocalPosition.x
@@ -8473,7 +8473,7 @@ PrefabInstance:
       objectReference: {fileID: 775763350}
     - target: {fileID: 8758111055793416078, guid: e78f341fabe70834ab9a231d74a4c29d, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8758111055793416078, guid: e78f341fabe70834ab9a231d74a4c29d, type: 3}
       propertyPath: spawningRate
@@ -8951,7 +8951,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 1591104244}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1818763159}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f926fd208aac4a548e10bf4c230b2412, type: 3}
   m_Name: 
