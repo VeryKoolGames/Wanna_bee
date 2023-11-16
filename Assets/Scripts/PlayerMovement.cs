@@ -9,25 +9,7 @@ public class PlayerMovement : MonoBehaviour
 
     private Rigidbody2D rb;
     private PlayerActions playerScript;
-    // private bool canMove = true;
-
     private Vector2 movementDirection;
-    // Start is called before the first frame update
-    // private void OnTriggerEnter2D(Collider2D col)
-    // {
-    //     if (col.CompareTag("MapLimit"))
-    //     {
-    //         canMove = false;
-    //     }
-    // }
-    //
-    // private void OnTriggerExit2D(Collider2D other)
-    // {
-    //     if (other.CompareTag("MapLimit"))
-    //     {
-    //         canMove = true;
-    //     }
-    // }
 
     void Start()
     {

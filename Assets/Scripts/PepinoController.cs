@@ -8,10 +8,6 @@ public class PepinoController : MonoBehaviour
     private GameObject _target;
     private GameObject _audioManager;
 
-    private void Start()
-    {
-    }
-
     // Update is called once per frame
     private void Update()
     {
@@ -43,11 +39,6 @@ public class PepinoController : MonoBehaviour
     {
         _target = target;
         Debug.Log("I got set target pepino : " + _target.tag); // this works, but does not seem to save target
-    }
-
-    public string getTargetTag()
-    {
-        return (_target.tag);
     }
     
 }
