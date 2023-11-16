@@ -16,10 +16,4 @@ public class showEndingSceneMenu : MonoBehaviour
         yield return new WaitForSeconds(10f);
         menuButtons.SetActive(true);
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

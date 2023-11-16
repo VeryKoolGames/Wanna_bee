@@ -22,7 +22,7 @@ public class StartMenu : MonoBehaviour
     public void StartCredits()
     {
         _audioManager.GetComponent<AudioManager>().playSound("ButtonClick");
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene(3);
     }
     
     

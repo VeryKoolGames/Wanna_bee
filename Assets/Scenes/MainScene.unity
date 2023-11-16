@@ -7752,6 +7752,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2479174791262412021, guid: e5301c89514e1484cac4f05179c4b340, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6359899506209163637, guid: e5301c89514e1484cac4f05179c4b340, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -8469,7 +8473,7 @@ PrefabInstance:
       objectReference: {fileID: 775763350}
     - target: {fileID: 8758111055793416078, guid: e78f341fabe70834ab9a231d74a4c29d, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8758111055793416078, guid: e78f341fabe70834ab9a231d74a4c29d, type: 3}
       propertyPath: spawningRate
@@ -8947,7 +8951,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 1591104244}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1818763159}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f926fd208aac4a548e10bf4c230b2412, type: 3}
   m_Name: 
@@ -14160,7 +14164,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1659953857844688631, guid: a502e6dc75554c54b99235035819dc00, type: 3}
       propertyPath: m_Size.y
-      value: 1.3329315
+      value: 0.66557217
       objectReference: {fileID: 0}
     - target: {fileID: 1659953857844688631, guid: a502e6dc75554c54b99235035819dc00, type: 3}
       propertyPath: m_Offset.x
@@ -14168,7 +14172,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1659953857844688631, guid: a502e6dc75554c54b99235035819dc00, type: 3}
       propertyPath: m_Offset.y
-      value: -0.037590265
+      value: -0.37126994
       objectReference: {fileID: 0}
     - target: {fileID: 1659953857844688631, guid: a502e6dc75554c54b99235035819dc00, type: 3}
       propertyPath: m_IsTrigger
@@ -14188,7 +14192,7 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: 67596801779ac410a951d288ef713a5d, type: 3}
     - target: {fileID: 3573519827787215831, guid: a502e6dc75554c54b99235035819dc00, type: 3}
       propertyPath: m_SortingOrder
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 4328000336465132953, guid: a502e6dc75554c54b99235035819dc00, type: 3}
       propertyPath: m_Layer

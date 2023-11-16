@@ -3,7 +3,6 @@ using System.Collections;
 using UnityEngine;
 public class HoneySpawnMonitor : MonoBehaviour
 {
-    [SerializeField] private GameObject[] spawnPoints;
     [SerializeField] private GameObject[] assetsList;
     [SerializeField] private int minPopTime = 5;
     [SerializeField] private int maxPopTime = 7;
@@ -23,11 +22,6 @@ public class HoneySpawnMonitor : MonoBehaviour
         StartCoroutine(SpawnHoney());
     }
 
-    private void Update()
-    {
-        
-    }
-    
     private IEnumerator SpawnHoney()
     {
         while (true)
