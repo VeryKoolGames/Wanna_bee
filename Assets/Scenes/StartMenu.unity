@@ -466,7 +466,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1372747414}
         m_TargetAssemblyTypeName: StartMenu, Assembly-CSharp
-        m_MethodName: StartGame
+        m_MethodName: StartCredits
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

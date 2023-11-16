@@ -20,7 +20,7 @@ public class PlayerActions : MonoBehaviour
 {
     public int beeCounter = 0; 
     public int ressourceCounter = 0;
-    private GameObject currentFlower;
+    [SerializeField] private GameObject currentFlower;
 
     [SerializeField] private int maxBee = 50;
     [SerializeField] private int ressourceToEnd = 50;
@@ -39,9 +39,7 @@ public class PlayerActions : MonoBehaviour
     private BoxCollider2D beeSpawnArena;
     private HoneyState currentFlowerState;
     private int countCollider;
-    private bool _canPlantFlowers = true;
-    private bool _canInteractWithFlowers = true;
-    private bool _canInteractWithEnd = true;
+    private bool _canInteractWithEnd;
     private CounterHandler _counterHandler;
 
     private void Awake()
@@ -69,17 +67,11 @@ public class PlayerActions : MonoBehaviour
     {
         if (other.CompareTag("Flower"))
         {
-            _canInteractWithFlowers = false;
             currentFlower.GetComponent<FlowerGAction>().HideBeeUI();
             currentFlower = null;
         }
-        else if (other.CompareTag("FlowerSpawn"))
-        {
-            _canPlantFlowers = true;
-        }
         else if (other.CompareTag("End"))
         {
-            _canPlantFlowers = true;
             _canInteractWithEnd = false;
             _endingManager.baseTree();
         }
@@ -90,24 +82,17 @@ public class PlayerActions : MonoBehaviour
         if (col.CompareTag("Honey"))
         {
             AudioManager.Instance.playSound("Collectible");
-            Debug.Log("HONEYYYY");
             _setRessources(ressourceCounter + 5);
             _counterHandler.updateHoneyCounter(ressourceCounter, 5);
             Destroy(col.gameObject);
         }
         else if (col.CompareTag("Flower"))
         {
-            _canInteractWithFlowers = true;
             currentFlower = col.gameObject;
             col.gameObject.GetComponent<FlowerGAction>().ShowBeeUI();
         }
-        else if (col.CompareTag("FlowerSpawn"))
-        {
-            _canPlantFlowers = false;
-        }
         else if (col.CompareTag("End"))
         {
-            _canPlantFlowers = false;
             _canInteractWithEnd = true;
             _endingManager.highlightTree();
         }
@@ -144,11 +129,10 @@ public class PlayerActions : MonoBehaviour
 
     private void SpawnFlower()
     {
-        if (!_canPlantFlowers) return;
-        if (Input.GetKeyDown("1") && ressourceCounter >= 10)
+        if (Input.GetKeyDown("1") && ressourceCounter >= 10  && !_canInteractWithEnd && _canSpawnFlower())
         {
             AudioManager.Instance.playSound("ButtonClick");
-            Instantiate(flowerDObject, GetRandomPointInCollider(beeSpawnArena), Quaternion.identity);
+            Instantiate(flowerDObject, transform.position, Quaternion.identity);
             _setRessources(ressourceCounter - 10);
             _counterHandler.updateHoneyCounter(ressourceCounter, -10);
         }
@@ -159,7 +143,7 @@ public class PlayerActions : MonoBehaviour
         else if (Input.GetKeyDown("2") && ressourceCounter >= 20)
         {
             AudioManager.Instance.playSound("ButtonClick");
-            Instantiate(flowerTObject, GetRandomPointInCollider(beeSpawnArena), Quaternion.identity);
+            Instantiate(flowerTObject, transform.position, Quaternion.identity);
             _setRessources(ressourceCounter - 20);
             _counterHandler.updateHoneyCounter(ressourceCounter, -20);
         }
@@ -174,8 +158,6 @@ public class PlayerActions : MonoBehaviour
     {
         uiCanvasAnim.SetTrigger(trigger);
         AudioManager.Instance.playSound("notEnoughRessources");
-        // Should play a song
-        return;
     }
 
     private void SpawnBee()
@@ -209,7 +191,7 @@ public class PlayerActions : MonoBehaviour
     
     private void FeedFlowers()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && _canInteractWithFlowers && !_canInteractWithEnd)
+        if (Input.GetKeyDown(KeyCode.Space) && currentFlower && !_canInteractWithEnd)
         {
             AudioManager.Instance.playSound("ButtonClick");
             FlowerGAction flowerScript = currentFlower.GetComponent<FlowerGAction>();
@@ -244,6 +226,22 @@ public class PlayerActions : MonoBehaviour
         {
             _NotEnoughRessources("notEnoughElixir");
         }
+    }
+
+    private bool _canSpawnFlower()
+    {
+        GameObject[] flowers = GameObject.FindGameObjectsWithTag("Flower");
+        float smallerDistance = 500f;
+        foreach (var flower in flowers)
+        {
+            float distance = Vector2.Distance(transform.position, flower.transform.position);
+            if (distance < smallerDistance)
+                smallerDistance = distance;
+        }
+        
+        if (smallerDistance == 500f)
+            return true;
+        return smallerDistance > 2f;
     }
     
     public IEnumerator launchEndGame()
