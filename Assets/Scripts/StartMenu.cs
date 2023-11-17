@@ -17,13 +17,13 @@ public class StartMenu : MonoBehaviour
     public void StartGame()
     {
         _audioManager.GetComponent<AudioManager>().playSound("ButtonClick");
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(2);
     }
     
     public void StartCredits()
     {
         _audioManager.GetComponent<AudioManager>().playSound("ButtonClick");
-        SceneManager.LoadScene(3);
+        SceneManager.LoadScene(4);
     }
     
     
