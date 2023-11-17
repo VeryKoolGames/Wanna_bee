@@ -13324,7 +13324,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8758111055793416078, guid: e78f341fabe70834ab9a231d74a4c29d, type: 3}
       propertyPath: spawningRate
-      value: 5
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 8758111055793416078, guid: e78f341fabe70834ab9a231d74a4c29d, type: 3}
       propertyPath: spawnZones.Array.size

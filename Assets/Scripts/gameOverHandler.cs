@@ -13,13 +13,11 @@ public class gameOverHandler : MonoBehaviour
 
     public void Restart()
     {
-        Time.timeScale = 1f;
         SceneManager.LoadScene(2);
     }
 
     public void BackToMenu()
     {
-        Time.timeScale = 1f;
         SceneManager.LoadScene(1);
     }
 

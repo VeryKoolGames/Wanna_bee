@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Random = UnityEngine.Random;
 
 public class EnemyController : MonoBehaviour
 {
@@ -10,13 +11,10 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private float speed = 1f;
     [SerializeField] private GameObject destroyParticles;
     private bool isQuitting;
-
-    public void setIsQuitting(bool value)
-    {
-        isQuitting = value;
-    }
+    
     void Start()
     {
+        speed += Random.Range(0, 2f);
         enemyManager.Register(gameObject.GetInstanceID(), this);
         findTarget();
     }
@@ -34,8 +32,6 @@ public class EnemyController : MonoBehaviour
         if (_target)
         {
             Transform target = _target.transform;
-            Vector2 direction = target.position - transform.position;
-
             transform.position =
                 Vector2.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
         }

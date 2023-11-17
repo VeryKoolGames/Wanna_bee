@@ -3,19 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GameOverMenu : MonoBehaviour
+public class EndMenuManager : MonoBehaviour
 {
-    public void StartGame()
+    // Start is called before the first frame update
+    public void Restart()
     {
         SceneManager.LoadScene(2);
     }
-    
-    public void BackToMainMenu()
+
+    public void BackToMenu()
     {
         SceneManager.LoadScene(1);
     }
-    
-    
+
+
     public void Quit()
     {
         Application.Quit();

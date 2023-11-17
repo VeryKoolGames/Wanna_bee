@@ -31,14 +31,13 @@ public class PepinoController : MonoBehaviour
         {
             AudioManager.Instance.playSound("HitHurt2");
             Destroy(col.transform.gameObject);
-            Debug.Log("P: Enemy Down");
+            Destroy(gameObject);
         }
     }
 
     public void setTarget(GameObject target)
     {
         _target = target;
-        Debug.Log("I got set target pepino : " + _target.tag); // this works, but does not seem to save target
     }
     
 }
