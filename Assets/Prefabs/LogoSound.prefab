@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2234329515250123372}
   - component: {fileID: 1988449612760278024}
-  - component: {fileID: 2752160270390587751}
   m_Layer: 0
   m_Name: LogoSound
   m_TagString: Untagged
@@ -129,18 +128,3 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &2752160270390587751
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7686330197240488056}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: af3727008acd14795922d150066826df, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  startSound: {fileID: 8300000, guid: 78a27c5d2d4e44e9ea92fdc8b3be0861, type: 3}
-  AudioSource: {fileID: 1988449612760278024}
-  waitingTime: 1.2
