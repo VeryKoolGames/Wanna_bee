@@ -28,7 +28,6 @@ public class AllyHP : MonoBehaviour
             Destroy(col.gameObject);
             enemyManager.Instance.RemoveEnemy(col.gameObject.GetInstanceID());
             isImmun = true;
-            healthBar.setHealth(hp);
             StartCoroutine(immunTimer());
         }
     }
@@ -53,6 +52,7 @@ public class AllyHP : MonoBehaviour
             hp -= 10 - (2 * playerActions.beeCounter);
             playerActions.removeBees();
             this.playerActions.playHitAnim();
+            healthBar.setHealth(hp);
         }
         else
         {
