@@ -10,6 +10,7 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D rb;
     private PlayerActions playerScript;
     private Vector2 movementDirection;
+    public Animator animator;
 
     void Start()
     {
@@ -21,6 +22,10 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         movementDirection = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+
+        animator.SetFloat("Horizontal", movementDirection.x);
+        animator.SetFloat("Vertical", movementDirection.y);
+        animator.SetFloat("speed", movementDirection.sqrMagnitude);
     }
 
     private void FixedUpdate()

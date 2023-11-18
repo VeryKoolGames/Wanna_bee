@@ -32,6 +32,8 @@ public class PlayerActions : MonoBehaviour
     [SerializeField] private EndingManager _endingManager;
     [SerializeField] private Animator uiCanvasAnim;
     [SerializeField] private Animator _playerHitAnim;
+    [SerializeField] private SpriteRenderer reservoirSprite;
+    public Sprite[] reservoirStates;
     public List<KeyValuePair> MyList = new List<KeyValuePair>();
     private Dictionary<int, Animator> Animations = new Dictionary<int, Animator>();
     private HoneyState _currentFlowerState;
@@ -229,6 +231,34 @@ public class PlayerActions : MonoBehaviour
         }
     }
 
+    private void Reservoir()
+    {
+        if (ressourceCounter <= 0)
+        {
+            reservoirSprite.sprite = reservoirStates[0];
+        }
+        if ((ressourceCounter > 0) && (ressourceCounter < 45))
+        {
+            reservoirSprite.sprite = reservoirStates[1];
+        }
+        if ((ressourceCounter > 45) && (ressourceCounter < 90))
+        {
+            reservoirSprite.sprite = reservoirStates[2];
+        }
+        if ((ressourceCounter > 90) && (ressourceCounter < 135))
+        {
+            reservoirSprite.sprite = reservoirStates[3];
+        }
+        if ((ressourceCounter > 135) && (ressourceCounter < 180))
+        {
+            reservoirSprite.sprite = reservoirStates[4];
+        }
+        if (ressourceCounter > 180)
+        {
+            reservoirSprite.sprite = reservoirStates[5];
+        }
+    }
+
     private bool _canSpawnFlower()
     {
         GameObject[] flowers = GameObject.FindGameObjectsWithTag("Flower");
@@ -262,6 +292,7 @@ public class PlayerActions : MonoBehaviour
         SpawnFlower();
         FeedFlowers();
         CompleteGame();
+        Reservoir();
     }
 
     private void godMode()
