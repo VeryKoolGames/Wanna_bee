@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.4465788, g: 0.49641287, b: 0.5748173, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -6457,6 +6457,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pixelArtFilter: {fileID: 4800000, guid: 40f888868bff54e489d63cf2a046892c, type: 3}
   downSamples: 2
+  pixelArtMat: {fileID: 0}
 --- !u!114 &963194230
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6471,6 +6472,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sharpnessShader: {fileID: 4800000, guid: a60d9da21dda2f649b384ce891b66ca7, type: 3}
   amount: 0.4
+  sharpnessMat: {fileID: 0}
 --- !u!114 &963194231
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6484,12 +6486,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   vignette: {fileID: 4800000, guid: b7d6dff116d04ae4ab0ab4862a30de42, type: 3}
-  vignetteColor: {r: 0, g: 0, b: 0, a: 0}
+  vignetteColor:
+    r: 0
+    g: 0
+    b: 0
+    a: 0
   vignetteOffset: {x: 0, y: 0}
   vignetteSize: {x: 1, y: 1}
   intensity: 1.24
   roundness: 1.33
   smoothness: 0.62
+  vignetteMat: {fileID: 0}
 --- !u!1001 &1005020115
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6867,7 +6874,6 @@ GameObject:
   - component: {fileID: 1143976502}
   - component: {fileID: 1143976501}
   - component: {fileID: 1143976500}
-  - component: {fileID: 1143976504}
   - component: {fileID: 1143976505}
   m_Layer: 0
   m_Name: Pixel Perfect Camera
@@ -6965,20 +6971,6 @@ Transform:
   - {fileID: 1234061935}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1143976504
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1143976499}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62b3db54267ead9478a878356b48e20f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pixelArtFilter: {fileID: 4800000, guid: 40f888868bff54e489d63cf2a046892c, type: 3}
-  downSamples: 1
 --- !u!81 &1143976505
 AudioListener:
   m_ObjectHideFlags: 0
